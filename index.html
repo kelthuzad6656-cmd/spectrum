@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spectrum — Experience Color & Light</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Unique ID for testing -->
+    <div id="spectrum-app-root">
+        <!-- Header -->
+        <header id="main-header">
+            <div class="container header-container">
+                <a href="#" class="logo" id="nav-logo">
+                    <span class="logo-dot"></span>
+                    Spectrum
+                </a>
+                <nav id="main-nav">
+                    <ul>
+                        <li><a href="#features" class="nav-link">Features</a></li>
+                        <li><a href="#interactive" class="nav-link">Interactive</a></li>
+                        <li><a href="#about" class="nav-link">About</a></li>
+                    </ul>
+                </nav>
+                <div class="header-actions">
+                    <button id="cta-button" class="btn btn-primary">Get Started</button>
+                </div>
+            </div>
+        </header>
+
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container hero-container">
+                <div class="hero-content">
+                    <span class="badge" id="hero-badge">Introducing Spectrum 2.0</span>
+                    <h1 id="hero-title">A minimalist space for <span>creative minds</span>.</h1>
+                    <p id="hero-subtitle">Experience a clean, distraction-free environment designed to help you focus on what truly matters. Simple, modern, and beautiful.</p>
+                    <div class="hero-buttons">
+                        <a href="#interactive" class="btn btn-primary">Try Interactive Demo</a>
+                        <a href="#features" class="btn btn-secondary">Learn More</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="prism-card">
+                        <div class="prism-content">
+                            <div class="prism-glow"></div>
+                            <div class="prism-face">
+                                <span class="prism-logo"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
+                                <h3>Spectrum Design</h3>
+                                <p>Hover to interact with light refraction.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Designed with Purpose</h2>
+                    <p>Every element is crafted to provide a serene and productive user experience.</p>
+                </div>
+                <div class="features-grid">
+                    <div class="feature-card" id="feat-1">
+                        <div class="feature-icon"><i class="fa-solid fa-feather"></i></div>
+                        <h3>Ultra Lightweight</h3>
+                        <p>Optimized for lightning-fast loading speeds and smooth responsive performance.</p>
+                    </div>
+                    <div class="feature-card" id="feat-2">
+                        <div class="feature-icon"><i class="fa-solid fa-eye"></i></div>
+                        <h3>Visual Harmony</h3>
+                        <p>A carefully selected color palette that minimizes eye strain and maximizes readability.</p>
+                    </div>
+                    <div class="feature-card" id="feat-3">
+                        <div class="feature-icon"><i class="fa-solid fa-crop-simple"></i></div>
+                        <h3>Pure Minimalism</h3>
+                        <p>No clutter, no distractions. Just your content framed in elegant whitespace.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interactive Spectrum Picker Section -->
+        <section id="interactive">
+            <div class="container interactive-container">
+                <div class="interactive-info">
+                    <h2>Control the Spectrum</h2>
+                    <p>Interact with the slider below to shift the accent colors of the website. Watch how the interface adapts to different color temperatures and vibes.</p>
+                    <div class="color-details">
+                        <span class="color-label">Active Tone:</span>
+                        <span id="active-color-name" class="color-value">Royal Blue</span>
+                    </div>
+                </div>
+                <div class="interactive-control">
+                    <div class="spectrum-slider-wrapper">
+                        <input type="range" id="spectrum-hue" min="0" max="360" value="230" class="spectrum-slider">
+                        <div class="spectrum-bar"></div>
+                    </div>
+                    <div class="quick-presets">
+                        <button class="preset-btn active" data-hue="230" style="--btn-color: hsl(230, 85%, 60%)">Indigo</button>
+                        <button class="preset-btn" data-hue="340" style="--btn-color: hsl(340, 85%, 60%)">Rose</button>
+                        <button class="preset-btn" data-hue="150" style="--btn-color: hsl(150, 85%, 50%)">Emerald</button>
+                        <button class="preset-btn" data-hue="25" style="--btn-color: hsl(25, 85%, 55%)">Amber</button>
+                        <button class="preset-btn" data-hue="280" style="--btn-color: hsl(280, 85%, 60%)">Amethyst</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter / CTA -->
+        <section id="cta">
+            <div class="container cta-container">
+                <div class="cta-card">
+                    <div class="cta-bg-glow"></div>
+                    <h2>Stay in the loop</h2>
+                    <p>Subscribe to our newsletter for clean design tips, updates, and modern web resources.</p>
+                    <form id="newsletter-form" class="cta-form">
+                        <div class="input-group">
+                            <input type="email" id="newsletter-email" placeholder="Enter your email" required>
+                            <button type="submit" class="btn btn-primary" id="btn-subscribe">Subscribe</button>
+                        </div>
+                    </form>
+                    <div id="newsletter-status" class="status-msg"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="main-footer">
+            <div class="container footer-container">
+                <p class="copyright">&copy; 2026 Spectrum. Created with pure elegance.</p>
+                <div class="footer-socials">
+                    <a href="#" class="social-link"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
