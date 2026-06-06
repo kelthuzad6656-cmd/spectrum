@@ -259,6 +259,15 @@
             }
         }
     </style>
+    <!-- Fallback stylesheet in case JavaScript is disabled or fails to execute -->
+    <noscript>
+        <style>
+            .reveal-element {
+                opacity: 1 !important;
+                transform: none !important;
+            }
+        </style>
+    </noscript>
 </head>
 <body class="bg-dark text-gray-200 overflow-x-hidden font-sans selection:bg-neon-cyan selection:text-dark relative">
 
@@ -932,152 +941,180 @@
             // 2. High-Performance Zero-Gravity Canvas Particle Matrix
             // ==========================================
             const canvas = document.getElementById('physics-canvas');
-            const ctx = canvas.getContext('2d');
+            const ctx = canvas ? canvas.getContext('2d') : null;
             let particles = [];
             
-            function resizeCanvas() {
-                canvas.width = window.innerWidth;
-                canvas.height = window.innerHeight;
-            }
-            
-            window.addEventListener('resize', resizeCanvas);
-            resizeCanvas();
-
-            class Particle {
-                constructor() {
-                    this.x = Math.random() * canvas.width;
-                    this.y = Math.random() * canvas.height;
-                    this.size = Math.random() * 2.2 + 0.8;
-                    
-                    // Core zero-gravity drift parameters
-                    this.baseSpeedY = -(Math.random() * 0.4 + 0.1); // slow upward
-                    this.baseSpeedX = Math.random() * 0.2 - 0.1;
-                    
-                    this.vx = this.baseSpeedX;
-                    this.vy = this.baseSpeedY;
-                    
-                    this.angle = Math.random() * Math.PI * 2;
-                    this.angleSpeed = Math.random() * 0.015 - 0.0075;
+            if (canvas && ctx) {
+                let resizeCanvas = function() {
+                    canvas.width = window.innerWidth;
+                    canvas.height = window.innerHeight;
                 }
+                
+                window.addEventListener('resize', resizeCanvas);
+                resizeCanvas();
 
-                update() {
-                    // Friction damping
-                    this.vx *= 0.97;
-                    this.vy *= 0.97;
-                    
-                    // Accumulate gentle drift forces
-                    this.vy += this.baseSpeedY * 0.04;
-                    this.vx += this.baseSpeedX * 0.04 + Math.sin(this.angle) * 0.006;
-                    this.angle += this.angleSpeed;
-                    
-                    // Repulsion from user cursor
-                    let dx = this.x - mouse.x;
-                    let dy = this.y - mouse.y;
-                    let dist = Math.sqrt(dx * dx + dy * dy);
-                    
-                    if (dist < mouse.radius) {
-                        // Elastic repulsion scalar
-                        let force = (mouse.radius - dist) / mouse.radius; // 0 to 1
-                        let forceDirectionX = dx / dist;
-                        let forceDirectionY = dy / dist;
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = Math.random() * canvas.height;
+                        this.size = Math.random() * 2.2 + 0.8;
                         
-                        this.vx += forceDirectionX * force * 0.55;
-                        this.vy += forceDirectionY * force * 0.55;
-                    }
-
-                    // Apply coordinates
-                    this.x += this.vx;
-                    this.y += this.vy;
-
-                    // Loop boundaries
-                    if (this.y < -15) {
-                        this.y = canvas.height + 15;
-                        this.x = Math.random() * canvas.width;
+                        this.baseSpeedY = -(Math.random() * 0.4 + 0.1); // slow upward
+                        this.baseSpeedX = Math.random() * 0.2 - 0.1;
+                        
                         this.vx = this.baseSpeedX;
                         this.vy = this.baseSpeedY;
-                    } else if (this.y > canvas.height + 15) {
-                        this.y = -15;
-                        this.x = Math.random() * canvas.width;
-                        this.vx = this.baseSpeedX;
-                        this.vy = this.baseSpeedY;
+                        
+                        this.angle = Math.random() * Math.PI * 2;
+                        this.angleSpeed = Math.random() * 0.015 - 0.0075;
                     }
-                    
-                    if (this.x < -15) {
-                        this.x = canvas.width + 15;
-                    } else if (this.x > canvas.width + 15) {
-                        this.x = -15;
-                    }
-                }
 
-                draw() {
-                    ctx.fillStyle = 'rgba(0, 242, 254, 0.45)';
-                    ctx.beginPath();
-                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                    ctx.fill();
-                }
-            }
-
-            function initParticles() {
-                particles = [];
-                // Density control based on viewport size
-                const numberOfParticles = Math.min(90, (canvas.width * canvas.height) / 16000);
-                for (let i = 0; i < numberOfParticles; i++) {
-                    particles.push(new Particle());
-                }
-            }
-            initParticles();
-
-            function connectParticles() {
-                for (let a = 0; a < particles.length; a++) {
-                    for (let b = a + 1; b < particles.length; b++) {
-                        let dx = particles[a].x - particles[b].x;
-                        let dy = particles[a].y - particles[b].y;
+                    update() {
+                        // Friction damping
+                        this.vx *= 0.97;
+                        this.vy *= 0.97;
+                        
+                        // Accumulate gentle drift forces
+                        this.vy += this.baseSpeedY * 0.04;
+                        this.vx += this.baseSpeedX * 0.04 + Math.sin(this.angle) * 0.006;
+                        this.angle += this.angleSpeed;
+                        
+                        // Repulsion from user cursor
+                        let dx = this.x - mouse.x;
+                        let dy = this.y - mouse.y;
                         let dist = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (dist < mouse.radius) {
+                            // Elastic repulsion scalar
+                            let force = (mouse.radius - dist) / mouse.radius; // 0 to 1
+                            let forceDirectionX = dx / dist;
+                            let forceDirectionY = dy / dist;
+                            
+                            this.vx += forceDirectionX * force * 0.55;
+                            this.vy += forceDirectionY * force * 0.55;
+                        }
 
-                        if (dist < 115) {
-                            let opacity = (1 - (dist / 115)) * 0.14;
-                            
-                            // Glowing Cyan-to-Violet gradient link lines
-                            let grad = ctx.createLinearGradient(particles[a].x, particles[a].y, particles[b].x, particles[b].y);
-                            grad.addColorStop(0, `rgba(0, 242, 254, ${opacity})`);
-                            grad.addColorStop(1, `rgba(127, 0, 255, ${opacity})`);
-                            
-                            ctx.strokeStyle = grad;
-                            ctx.lineWidth = 0.8;
-                            ctx.beginPath();
-                            ctx.moveTo(particles[a].x, particles[a].y);
-                            ctx.lineTo(particles[b].x, particles[b].y);
-                            ctx.stroke();
+                        // Apply coordinates
+                        this.x += this.vx;
+                        this.y += this.vy;
+
+                        // Loop boundaries
+                        if (this.y < -15) {
+                            this.y = canvas.height + 15;
+                            this.x = Math.random() * canvas.width;
+                            this.vx = this.baseSpeedX;
+                            this.vy = this.baseSpeedY;
+                        } else if (this.y > canvas.height + 15) {
+                            this.y = -15;
+                            this.x = Math.random() * canvas.width;
+                            this.vx = this.baseSpeedX;
+                            this.vy = this.baseSpeedY;
+                        }
+                        
+                        if (this.x < -15) {
+                            this.x = canvas.width + 15;
+                        } else if (this.x > canvas.width + 15) {
+                            this.x = -15;
+                        }
+                    }
+
+                    draw() {
+                        ctx.fillStyle = 'rgba(0, 242, 254, 0.45)';
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+
+                function initParticles() {
+                    particles = [];
+                    // Density control based on viewport size
+                    const numberOfParticles = Math.min(90, (canvas.width * canvas.height) / 16000);
+                    for (let i = 0; i < numberOfParticles; i++) {
+                        particles.push(new Particle());
+                    }
+                }
+                initParticles();
+
+                function connectParticles() {
+                    for (let a = 0; a < particles.length; a++) {
+                        for (let b = a + 1; b < particles.length; b++) {
+                            let dx = particles[a].x - particles[b].x;
+                            let dy = particles[a].y - particles[b].y;
+                            let dist = Math.sqrt(dx * dx + dy * dy);
+
+                            if (dist < 115) {
+                                let opacity = (1 - (dist / 115)) * 0.14;
+                                
+                                // Glowing Cyan-to-Violet gradient link lines
+                                let grad = ctx.createLinearGradient(particles[a].x, particles[a].y, particles[b].x, particles[b].y);
+                                grad.addColorStop(0, `rgba(0, 242, 254, ${opacity})`);
+                                grad.addColorStop(1, `rgba(127, 0, 255, ${opacity})`);
+                                
+                                ctx.strokeStyle = grad;
+                                ctx.lineWidth = 0.8;
+                                ctx.beginPath();
+                                ctx.moveTo(particles[a].x, particles[a].y);
+                                ctx.lineTo(particles[b].x, particles[b].y);
+                                ctx.stroke();
+                            }
                         }
                     }
                 }
-            }
 
-            function animateParticles() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                for (let i = 0; i < particles.length; i++) {
-                    particles[i].update();
-                    particles[i].draw();
+                function animateParticles() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    for (let i = 0; i < particles.length; i++) {
+                        particles[i].update();
+                        particles[i].draw();
+                    }
+                    connectParticles();
+                    requestAnimationFrame(animateParticles);
                 }
-                connectParticles();
-                requestAnimationFrame(animateParticles);
+                animateParticles();
             }
-            animateParticles();
 
             // ==========================================
-            // 3. Scroll-Observer Reveal System
+            // 3. Scroll-Observer Reveal System & Fallback
             // ==========================================
             const revealElements = document.querySelectorAll('.reveal-element');
-            const revealObserver = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('active');
-                        observer.unobserve(entry.target);
+            
+            // IntersectionObserver implementation
+            if ('IntersectionObserver' in window) {
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('active');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.02, rootMargin: '0px 0px -10px 0px' });
+
+                revealElements.forEach(el => revealObserver.observe(el));
+            } else {
+                revealElements.forEach(el => el.classList.add('active'));
+            }
+
+            // High-reliability viewport intersection fallback function
+            function runRevealFallback() {
+                revealElements.forEach(el => {
+                    if (!el.classList.contains('active')) {
+                        const rect = el.getBoundingClientRect();
+                        const offset = 30; // trigger padding in pixels from viewport bottom
+                        if (rect.top < window.innerHeight - offset && rect.bottom > 0) {
+                            el.classList.add('active');
+                        }
                     }
                 });
-            }, { threshold: 0.02, rootMargin: '0px 0px -10px 0px' });
+            }
 
-            revealElements.forEach(el => revealObserver.observe(el));
+            // Immediately reveal any elements already visible in viewport on page load
+            setTimeout(runRevealFallback, 150);
+            setTimeout(runRevealFallback, 600); // safety retry
+            
+            // Bind fallback triggers to scroll and resize events
+            window.addEventListener('scroll', runRevealFallback, { passive: true });
+            window.addEventListener('resize', runRevealFallback, { passive: true });
 
             // ==========================================
             // 4. Advanced Real-Time System Log Terminal Widget
@@ -1162,6 +1199,8 @@
             glitchCards.forEach(card => {
                 const titleEl = card.querySelector('.card-title');
                 const descEl = card.querySelector('.card-desc');
+                if (!titleEl || !descEl) return;
+                
                 const originalTitle = titleEl.textContent;
                 const originalDesc = card.getAttribute('data-original-text') || descEl.textContent;
                 
@@ -1257,11 +1296,15 @@
                     const content = btn.nextElementSibling;
                     const icon = btn.querySelector('i');
                     
+                    if (!item || !content) return;
                     const isActive = item.classList.contains('active');
 
                     document.querySelectorAll('.accordion-item').forEach(otherItem => {
                         otherItem.classList.remove('active');
-                        otherItem.querySelector('.accordion-content').style.maxHeight = null;
+                        const otherContent = otherItem.querySelector('.accordion-content');
+                        if (otherContent) {
+                            otherContent.style.maxHeight = null;
+                        }
                         const otherIcon = otherItem.querySelector('.accordion-btn i');
                         if (otherIcon) {
                             otherIcon.className = 'fa-solid fa-plus transition-transform duration-300 text-xs';
