@@ -60,6 +60,19 @@
             scroll-behavior: smooth;
         }
 
+        section {
+            scroll-margin-top: 90px;
+        }
+
+        /* Hide scrollbars for specific containers */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+
         /* Custom scrollbar matching agency colorway */
         ::-webkit-scrollbar {
             width: 8px;
@@ -357,7 +370,7 @@
                         </div>
                         <!-- Terminal Display -->
                         <div class="p-6 font-mono text-xs md:text-sm text-neon-cyan leading-relaxed min-h-[340px] flex flex-col justify-between">
-                            <div id="log-content-box" class="space-y-1.5 overflow-hidden">
+                            <div id="log-content-box" class="space-y-1.5 h-[240px] overflow-y-auto no-scrollbar">
                                 <!-- Populated dynamically by script -->
                             </div>
                             <div class="mt-4 pt-4 border-t border-dark-border/40 text-gray-600 text-xs flex justify-between">
@@ -474,9 +487,20 @@
 
         <!-- SECTION 4: THE HORIZONTAL TIMELINE LOOP (Our Launch Blueprint) -->
         <section id="blueprint" class="py-64 border-t border-dark-border relative w-full overflow-hidden">
-            <div class="max-w-7xl mx-auto px-6 md:px-12 w-full mb-12 reveal-element">
-                <span class="font-mono text-xs text-neon-cyan uppercase tracking-[0.3em] mb-2 block">LAUNCH TIMELINE</span>
-                <h2 class="text-3xl md:text-5xl font-black tracking-tight">Our Launch Blueprint</h2>
+            <div class="max-w-7xl mx-auto px-6 md:px-12 w-full mb-12 flex justify-between items-end reveal-element">
+                <div>
+                    <span class="font-mono text-xs text-neon-cyan uppercase tracking-[0.3em] mb-2 block">LAUNCH TIMELINE</span>
+                    <h2 class="text-3xl md:text-5xl font-black tracking-tight">Our Launch Blueprint</h2>
+                </div>
+                <!-- Navigation Arrows -->
+                <div class="hidden lg:flex gap-4 mb-2">
+                    <button id="slide-prev" class="w-12 h-12 rounded-full border border-dark-border hover:border-neon-cyan/80 flex items-center justify-center text-gray-400 hover:text-neon-cyan bg-dark-card hover:shadow-[0_0_15px_rgba(0,242,254,0.2)] transition-all duration-300" aria-label="Previous Phase">
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <button id="slide-next" class="w-12 h-12 rounded-full border border-dark-border hover:border-neon-cyan/80 flex items-center justify-center text-gray-400 hover:text-neon-cyan bg-dark-card hover:shadow-[0_0_15px_rgba(0,242,254,0.2)] transition-all duration-300" aria-label="Next Phase">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
             </div>
 
             <!-- Horizontal Viewport -->
@@ -914,7 +938,7 @@
                         observer.unobserve(entry.target);
                     }
                 });
-            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            }, { threshold: 0.02, rootMargin: '0px 0px -10px 0px' });
 
             revealElements.forEach(el => revealObserver.observe(el));
 
@@ -1137,47 +1161,97 @@
             // Timeline slider state vectors
             let currentTranslateX = 0;
             let targetTranslateX = 0;
-            let isHovered = false;
+            let hoverScrollSpeed = 0;
+            let isDragging = false;
+            let startX = 0;
+            let scrollLeftTranslate = 0;
+
+            const prevBtn = document.getElementById('slide-prev');
+            const nextBtn = document.getElementById('slide-next');
 
             if (pinContainer && slideTrack) {
-                // Monitor mouse interactions
-                pinContainer.addEventListener('mouseenter', () => {
-                    isHovered = true;
-                });
-                pinContainer.addEventListener('mouseleave', () => {
-                    isHovered = false;
-                });
+                const maxSlideDistance = () => Math.max(0, slideTrack.scrollWidth - pinContainer.clientWidth);
 
-                // Translate wheel rotation directly into track slide
-                pinContainer.addEventListener('wheel', (e) => {
-                    if (window.innerWidth > 1024 && isHovered) {
-                        const maxSlideDistance = slideTrack.scrollWidth - pinContainer.clientWidth;
-                        if (maxSlideDistance <= 0) return;
+                // 1. Navigation Arrow Clicks
+                if (prevBtn && nextBtn) {
+                    prevBtn.addEventListener('click', () => {
+                        targetTranslateX = Math.min(0, targetTranslateX + 380);
+                    });
 
-                        let nextTarget = targetTranslateX - e.deltaY * 0.95;
-                        let clampedTarget = Math.max(-maxSlideDistance, Math.min(0, nextTarget));
+                    nextBtn.addEventListener('click', () => {
+                        const maxDist = maxSlideDistance();
+                        targetTranslateX = Math.max(-maxDist, targetTranslateX - 380);
+                    });
+                }
 
-                        // Release lock to allow native scrolling at boundaries
-                        if (e.deltaY > 0 && targetTranslateX <= -maxSlideDistance) {
-                            return; // Slide ends - native scroll down
-                        }
-                        if (e.deltaY < 0 && targetTranslateX >= 0) {
-                            return; // Slide start - native scroll up
-                        }
-
-                        e.preventDefault();
-                        targetTranslateX = clampedTarget;
+                // 2. Mouse Drag Scroll
+                pinContainer.addEventListener('mousedown', (e) => {
+                    if (window.innerWidth > 1024) {
+                        isDragging = true;
+                        startX = e.pageX;
+                        scrollLeftTranslate = targetTranslateX;
+                        pinContainer.style.cursor = 'grabbing';
+                        hoverScrollSpeed = 0;
                     }
-                }, { passive: false });
+                });
 
+                window.addEventListener('mousemove', (e) => {
+                    if (!isDragging) return;
+                    if (window.innerWidth > 1024) {
+                        const x = e.pageX;
+                        const walk = (x - startX) * 1.4;
+                        const maxDist = maxSlideDistance();
+                        targetTranslateX = Math.max(-maxDist, Math.min(0, scrollLeftTranslate + walk));
+                    }
+                });
+
+                window.addEventListener('mouseup', () => {
+                    if (isDragging) {
+                        isDragging = false;
+                        if (pinContainer) pinContainer.style.cursor = 'ew-resize';
+                    }
+                });
+
+                // 3. Hover Edge Drift
+                pinContainer.addEventListener('mousemove', (e) => {
+                    if (isDragging) return;
+                    if (window.innerWidth > 1024) {
+                        const rect = pinContainer.getBoundingClientRect();
+                        const mouseX = e.clientX - rect.left;
+                        const width = rect.width;
+                        const activeZone = width * 0.15;
+                        const maxDist = maxSlideDistance();
+
+                        if (maxDist <= 0) {
+                            hoverScrollSpeed = 0;
+                            return;
+                        }
+
+                        if (mouseX < activeZone) {
+                            const factor = (activeZone - mouseX) / activeZone;
+                            hoverScrollSpeed = factor * 14; // Drift speed multiplier
+                        } else if (mouseX > width - activeZone) {
+                            const factor = (mouseX - (width - activeZone)) / activeZone;
+                            hoverScrollSpeed = -factor * 14;
+                        } else {
+                            hoverScrollSpeed = 0;
+                        }
+                    }
+                });
+
+                pinContainer.addEventListener('mouseleave', () => {
+                    hoverScrollSpeed = 0;
+                });
+
+                // 4. Handle resize bounds
                 window.addEventListener('resize', () => {
                     if (window.innerWidth <= 1024) {
                         slideTrack.style.transform = 'none';
                         targetTranslateX = 0;
                         currentTranslateX = 0;
                     } else {
-                        const maxSlideDistance = slideTrack.scrollWidth - pinContainer.clientWidth;
-                        targetTranslateX = Math.max(-maxSlideDistance, Math.min(0, targetTranslateX));
+                        const maxDist = maxSlideDistance();
+                        targetTranslateX = Math.max(-maxDist, Math.min(0, targetTranslateX));
                     }
                 });
             }
@@ -1193,8 +1267,14 @@
                     gridMesh.style.transform = `translateY(${-smoothScrollY * 0.08}px)`;
                 }
 
-                // Smoothly slide horizontal track with LERP on desktop only
+                // Apply continuous hover drift to horizontal slider
                 if (pinContainer && slideTrack && window.innerWidth > 1024) {
+                    const maxDist = slideTrack.scrollWidth - pinContainer.clientWidth;
+                    if (maxDist > 0) {
+                        if (hoverScrollSpeed !== 0 && !isDragging) {
+                            targetTranslateX = Math.max(-maxDist, Math.min(0, targetTranslateX + hoverScrollSpeed));
+                        }
+                    }
                     currentTranslateX += (targetTranslateX - currentTranslateX) * 0.098;
                     slideTrack.style.transform = `translateX(${currentTranslateX}px)`;
                 }
