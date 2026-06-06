@@ -1,60 +1,342 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spectrum — Experience Color & Light</title>
+    <title>Sync Webs — Premium Digital Infrastructure</title>
+    
+    <!-- Meta tags for SEO -->
+    <meta name="description" content="Sync Webs weaponizes premium digital infrastructure for offline businesses. We build ultra-fast, responsive, secure web platforms with zero-latency globally.">
+    <meta name="keywords" content="web development, digital infrastructure, fast website, portfolio, cyberpunk agency, Sync Webs">
+    
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;600;800;950&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+    
     <!-- FontAwesome for Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                        mono: ['Share Tech Mono', 'monospace'],
+                    },
+                    colors: {
+                        dark: {
+                            DEFAULT: '#050508',
+                            card: 'rgba(7, 7, 12, 0.75)',
+                            border: 'rgba(255, 255, 255, 0.05)',
+                        },
+                        neon: {
+                            cyan: '#00F2FE',
+                            violet: '#7F00FF',
+                        }
+                    },
+                    boxShadow: {
+                        'neon-glow': '0 0 10px rgba(0, 242, 254, 0.6), 0 0 20px rgba(127, 0, 255, 0.4)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Vanilla CSS Custom Relays -->
+    <style>
+        /* Base scroll resets */
+        html, body {
+            margin: 0;
+            padding: 0;
+            background-color: #050508;
+            color: #e2e8f0;
+            scroll-behavior: smooth;
+        }
+
+        /* Custom scrollbar matching agency colorway */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #050508;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.06);
+            border-radius: 4px;
+            transition: background 0.3s ease;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00F2FE;
+        }
+
+        /* 3D Parallax layers */
+        .technical-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(to right, rgba(0, 242, 254, 0.012) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(0, 242, 254, 0.012) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .parallax-layer {
+            will-change: transform;
+        }
+
+        /* Dense cyber glassmorphism sheets */
+        .bg-dark-card {
+            background: rgba(8, 8, 16, 0.7) !important;
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+        }
+
+        /* Glowing text elements */
+        .text-glow-cyan {
+            text-shadow: 0 0 12px rgba(0, 242, 254, 0.45), 0 0 24px rgba(0, 242, 254, 0.2);
+        }
+        .text-glow-violet {
+            text-shadow: 0 0 12px rgba(127, 0, 255, 0.45), 0 0 24px rgba(127, 0, 255, 0.2);
+        }
+
+        /* 3D Animated text grids for Founders Deck names */
+        .animated-pattern-text {
+            background: 
+                linear-gradient(90deg, rgba(5,5,8,0.2) 0%, rgba(5,5,8,0) 50%, rgba(5,5,8,0.2) 100%),
+                repeating-linear-gradient(45deg, rgba(0, 242, 254, 0.12) 0px, rgba(0, 242, 254, 0.12) 2px, transparent 2px, transparent 12px),
+                repeating-linear-gradient(-45deg, rgba(127, 0, 255, 0.12) 0px, rgba(127, 0, 255, 0.12) 2px, transparent 2px, transparent 12px),
+                linear-gradient(90deg, #00F2FE, #7F00FF, #00F2FE);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: textShinePattern 6s linear infinite;
+        }
+        @keyframes textShinePattern {
+            0% { background-position: 0% 0%; }
+            100% { background-position: 200% 100%; }
+        }
+
+        /* Zero-gravity kinetic decoration accents */
+        .floating-accent {
+            animation: floatingSlow 14s infinite alternate ease-in-out;
+        }
+        .floating-accent-reverse {
+            animation: floatingSlowReverse 18s infinite alternate ease-in-out;
+        }
+        @keyframes floatingSlow {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-24px) rotate(4deg); }
+            100% { transform: translateY(12px) rotate(-4deg); }
+        }
+        @keyframes floatingSlowReverse {
+            0% { transform: translateY(0px) rotate(0deg) scale(1); }
+            50% { transform: translateY(28px) rotate(-6deg) scale(1.04); }
+            100% { transform: translateY(-16px) rotate(3deg) scale(0.96); }
+        }
+
+        /* Smooth Accordion Height interpolation */
+        .accordion-content {
+            transition: max-height 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.4s ease;
+            opacity: 0;
+        }
+        .accordion-item.active .accordion-content {
+            opacity: 1;
+        }
+
+        /* Localized Accordion active flash glow */
+        @keyframes borderNeonFlash {
+            0% {
+                border-color: rgba(255, 255, 255, 0.05);
+                box-shadow: 0 0 0px rgba(0, 242, 254, 0);
+            }
+            15% {
+                border-color: rgba(0, 242, 254, 0.85);
+                box-shadow: 0 0 15px rgba(0, 242, 254, 0.3);
+            }
+            30% {
+                border-color: rgba(127, 0, 255, 0.85);
+                box-shadow: 0 0 15px rgba(127, 0, 255, 0.3);
+            }
+            100% {
+                border-color: rgba(0, 242, 254, 0.3);
+                box-shadow: 0 0 0px rgba(0, 242, 254, 0);
+            }
+        }
+        .accordion-item.active {
+            animation: borderNeonFlash 1.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            background: rgba(12, 12, 24, 0.85) !important;
+        }
+
+        /* Standard scroll reveal states */
+        .reveal-element {
+            opacity: 0;
+            transform: translateY(45px);
+            transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+            will-change: opacity, transform;
+        }
+        .reveal-element.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Neon Gradient borders on cyber sheets */
+        .glitch-card, .tilt-container, .accordion-item {
+            position: relative;
+        }
+        .glitch-card::before, .tilt-container::before, .accordion-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: linear-gradient(135deg, rgba(0, 242, 254, 0.12) 0%, rgba(127, 0, 255, 0.12) 100%);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            transition: background 0.4s ease;
+        }
+        .glitch-card:hover::before, .tilt-container:hover::before {
+            background: linear-gradient(135deg, #00F2FE 0%, #7F00FF 100%);
+        }
+
+        /* Moving radial mesh overlay inside the cursor halo */
+        #cursor-glow {
+            background: radial-gradient(circle, rgba(0, 242, 254, 0.1) 0%, rgba(127, 0, 255, 0.05) 55%, rgba(5, 5, 8, 0) 100%);
+            will-change: left, top;
+        }
+
+        /* Blinking caret on system console log widget */
+        .caret {
+            display: inline-block;
+            width: 8px;
+            height: 14px;
+            background-color: #00F2FE;
+            margin-left: 4px;
+            animation: blinkCaret 0.8s steps(2, start) infinite;
+            vertical-align: middle;
+        }
+        @keyframes blinkCaret {
+            to { visibility: hidden; }
+        }
+    </style>
 </head>
-<body>
-    <!-- Unique ID for testing -->
-    <div id="spectrum-app-root">
-        <!-- Header -->
-        <header id="main-header">
-            <div class="container header-container">
-                <a href="#" class="logo" id="nav-logo">
-                    <span class="logo-dot"></span>
-                    Spectrum
+<body class="bg-dark text-gray-200 overflow-x-hidden font-sans selection:bg-neon-cyan selection:text-dark relative">
+
+    <!-- Top Neon Scroll Progress Relay -->
+    <div id="scroll-progress" class="fixed top-0 left-0 h-[2.5px] bg-gradient-to-r from-neon-cyan to-neon-violet z-[100] w-0 transition-all duration-100"></div>
+
+    <!-- 3D Parallax Infrastructure Layers -->
+    
+    <!-- Layer 1: Parallax Code Stream Background -->
+    <div id="code-stream" class="parallax-layer select-none pointer-events-none opacity-[0.025] font-mono text-[9.5px] text-neon-cyan leading-relaxed absolute top-0 left-0 w-full h-full z-0 overflow-hidden">
+        <div>const sync_webs = { active: true, scale: "global", latency: "zero-point" };</div>
+        <div>function bootMatrix() { return Object.keys(sync_webs).map(k => k.toUpperCase()); }</div>
+        <div>// Weaponizing premium digital infrastructure for offline entities</div>
+        <div>class DigitalPortal { constructor() { this.uplink = "03112082874"; this.secure = true; } }</div>
+        <div>const founders = ["Sahil Ali", "Aliabbas"];</div>
+        <div>// Rendering HTML5 Canvas matrix particles at 60fps</div>
+        <div>// Bypassing default scroll metrics to map anti-gravity timelines</div>
+        <div>const sync_rules = ["promotional_only", "weekends_phone_support"];</div>
+        <div>console.log("Sync Webs network active. Secure handshake initialized...");</div>
+        <div>// Upfront Deposit Policy: Non-refundable 50% milestone payment clearance required.</div>
+    </div>
+
+    <!-- Layer 2: Technical Grid Mesh Overlay -->
+    <div class="technical-grid parallax-layer z-[1]"></div>
+
+    <!-- Layer 3: Interactive Zero-Gravity HTML5 Canvas Particle Matrix -->
+    <canvas id="physics-canvas" class="fixed top-0 left-0 w-full h-full pointer-events-none z-[2]"></canvas>
+
+    <!-- Interactive Mouse Glow Halo -->
+    <div id="cursor-glow" class="pointer-events-none fixed -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] rounded-full blur-[130px] opacity-[0.15] transition-transform duration-100 z-[3]"></div>
+
+    <!-- MAIN INTERFACE CONTAINER -->
+    <div class="relative z-10 w-full">
+        
+        <!-- HEADER / NAVIGATION RELAYS -->
+        <header class="fixed top-0 left-0 w-full z-50 border-b border-dark-border backdrop-blur-md bg-dark/60">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
+                <a href="#" class="logo-container group flex items-center gap-3">
+                    <span class="w-3.5 h-3.5 rounded-full bg-gradient-to-r from-neon-cyan to-neon-violet shadow-neon-glow animate-pulse"></span>
+                    <span class="font-mono text-xl font-bold tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-violet group-hover:opacity-85 transition-opacity">
+                        SYNC WEBS
+                    </span>
                 </a>
-                <nav id="main-nav">
-                    <ul>
-                        <li><a href="#features" class="nav-link">Features</a></li>
-                        <li><a href="#interactive" class="nav-link">Interactive</a></li>
-                        <li><a href="#about" class="nav-link">About</a></li>
-                    </ul>
+                <nav class="hidden lg:flex items-center gap-8 font-mono text-[11px] uppercase tracking-[0.2em]">
+                    <a href="#matrix" class="text-gray-400 hover:text-neon-cyan transition-colors">Core Matrix</a>
+                    <a href="#founders" class="text-gray-400 hover:text-neon-cyan transition-colors">Founders</a>
+                    <a href="#blueprint" class="text-gray-400 hover:text-neon-cyan transition-colors">Blueprint</a>
+                    <a href="#scope" class="text-gray-400 hover:text-neon-cyan transition-colors">Operational</a>
+                    <a href="#policies" class="text-gray-400 hover:text-neon-cyan transition-colors">Protocols</a>
+                    <a href="#contact" class="text-gray-400 hover:text-neon-cyan transition-colors">Uplink</a>
                 </nav>
-                <div class="header-actions">
-                    <button id="cta-button" class="btn btn-primary">Get Started</button>
+                <div>
+                    <a href="https://wa.me/923112082874" target="_blank" class="magnetic-btn border border-neon-cyan/25 hover:border-neon-cyan/90 px-6 py-2.5 rounded font-mono text-[11px] uppercase tracking-widest bg-neon-cyan/5 text-neon-cyan hover:bg-neon-cyan/15 hover:shadow-[0_0_20px_rgba(0,242,254,0.3)] transition-all duration-300">
+                        Uplink <i class="fa-solid fa-bolt ml-1.5"></i>
+                    </a>
                 </div>
             </div>
         </header>
 
-        <!-- Hero Section -->
-        <section id="hero">
-            <div class="container hero-container">
-                <div class="hero-content">
-                    <span class="badge" id="hero-badge">Introducing Spectrum 2.0</span>
-                    <h1 id="hero-title">A minimalist space for <span>creative minds</span>.</h1>
-                    <p id="hero-subtitle">Experience a clean, distraction-free environment designed to help you focus on what truly matters. Simple, modern, and beautiful.</p>
-                    <div class="hero-buttons">
-                        <a href="#interactive" class="btn btn-primary">Try Interactive Demo</a>
-                        <a href="#features" class="btn btn-secondary">Learn More</a>
+        <!-- SECTION 1: HERO GATEWAY (The Gravity Defier) -->
+        <section class="min-h-screen flex items-center pt-36 pb-36 relative w-full">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 w-full grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
+                <!-- Left Main Typography Header -->
+                <div class="lg:col-span-7 flex flex-col justify-center text-left reveal-element">
+                    <span class="font-mono text-xs text-neon-cyan uppercase tracking-[0.3em] mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-microchip animate-pulse"></i> DIGITAL INFRASTRUCTURE CORE ONLINE
+                    </span>
+                    <h1 class="text-4xl md:text-6xl lg:text-7xl font-black tracking-tight leading-[1.05] mb-8 font-sans">
+                        We weaponize <span class="text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-violet text-glow-cyan">premium digital</span> infrastructure for offline businesses.
+                    </h1>
+                    <p class="text-gray-400 text-base md:text-xl mb-12 max-w-xl font-light leading-relaxed">
+                        We design and deploy sprawling, hyper-fast digital frameworks for companies seeking absolute online supremacy. Dominate your market with next-gen speed.
+                    </p>
+                    <div class="flex flex-wrap gap-6">
+                        <a href="https://wa.me/923112082874" target="_blank" class="magnetic-btn px-8 py-5 rounded bg-gradient-to-r from-neon-cyan to-neon-violet text-dark font-mono text-xs font-bold uppercase tracking-widest hover:opacity-95 shadow-[0_0_25px_rgba(0,242,254,0.4)] hover:scale-[1.03] transition-all">
+                            Launch Project <i class="fa-brands fa-whatsapp ml-2"></i>
+                        </a>
+                        <a href="#blueprint" class="magnetic-btn px-8 py-5 rounded border border-dark-border hover:border-neon-violet/50 bg-dark-card text-gray-300 font-mono text-xs uppercase tracking-widest hover:text-white transition-all">
+                            Systems Blueprint <i class="fa-solid fa-code-branch ml-2"></i>
+                        </a>
                     </div>
                 </div>
-                <div class="hero-visual">
-                    <div class="prism-card">
-                        <div class="prism-content">
-                            <div class="prism-glow"></div>
-                            <div class="prism-face">
-                                <span class="prism-logo"><i class="fa-solid fa-wand-magic-sparkles"></i></span>
-                                <h3>Spectrum Design</h3>
-                                <p>Hover to interact with light refraction.</p>
+
+                <!-- Right Advanced Log Terminal -->
+                <div class="lg:col-span-5 reveal-element delay-200">
+                    <div class="w-full bg-[#07070e]/95 border border-dark-border rounded-xl shadow-3xl backdrop-blur-md overflow-hidden relative group hover:border-neon-cyan/20 transition-all duration-700">
+                        <div class="absolute inset-0 bg-gradient-to-b from-neon-cyan/2 to-transparent pointer-events-none"></div>
+                        <!-- Header Buttons -->
+                        <div class="px-5 py-4 bg-[#0a0a16] border-b border-dark-border flex items-center justify-between">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 rounded-full bg-[#ff5f56]"></span>
+                                <span class="w-3 h-3 rounded-full bg-[#ffbd2e]"></span>
+                                <span class="w-3 h-3 rounded-full bg-[#27c93f]"></span>
+                            </div>
+                            <span class="font-mono text-xs text-gray-500">sync_terminal_relay.log</span>
+                            <span class="w-4"></span>
+                        </div>
+                        <!-- Terminal Display -->
+                        <div class="p-6 font-mono text-xs md:text-sm text-neon-cyan leading-relaxed min-h-[340px] flex flex-col justify-between">
+                            <div id="log-content-box" class="space-y-1.5 overflow-hidden">
+                                <!-- Populated dynamically by script -->
+                            </div>
+                            <div class="mt-4 pt-4 border-t border-dark-border/40 text-gray-600 text-xs flex justify-between">
+                                <span>SECURE LINK: ACTIVE</span>
+                                <span>SHARDS: 12/12</span>
                             </div>
                         </div>
                     </div>
@@ -62,90 +344,815 @@
             </div>
         </section>
 
-        <!-- Features Section -->
-        <section id="features">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Designed with Purpose</h2>
-                    <p>Every element is crafted to provide a serene and productive user experience.</p>
+        <!-- SECTION 2: THE CORE MATRIX (Interactive Tech Architecture Grid) -->
+        <section id="matrix" class="py-64 border-t border-dark-border relative w-full">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+                <div class="text-center mb-32 reveal-element">
+                    <span class="font-mono text-xs text-neon-cyan uppercase tracking-[0.3em] mb-4 inline-block">SYSTEM MATRIX</span>
+                    <h2 class="text-3xl md:text-5xl font-black tracking-tight font-sans">Core Infrastructure Standards</h2>
+                    <div class="w-16 h-1 bg-gradient-to-r from-neon-cyan to-neon-violet mx-auto mt-6 rounded-full shadow-neon-glow"></div>
                 </div>
-                <div class="features-grid">
-                    <div class="feature-card" id="feat-1">
-                        <div class="feature-icon"><i class="fa-solid fa-feather"></i></div>
-                        <h3>Ultra Lightweight</h3>
-                        <p>Optimized for lightning-fast loading speeds and smooth responsive performance.</p>
-                    </div>
-                    <div class="feature-card" id="feat-2">
-                        <div class="feature-icon"><i class="fa-solid fa-eye"></i></div>
-                        <h3>Visual Harmony</h3>
-                        <p>A carefully selected color palette that minimizes eye strain and maximizes readability.</p>
-                    </div>
-                    <div class="feature-card" id="feat-3">
-                        <div class="feature-icon"><i class="fa-solid fa-crop-simple"></i></div>
-                        <h3>Pure Minimalism</h3>
-                        <p>No clutter, no distractions. Just your content framed in elegant whitespace.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <!-- Interactive Spectrum Picker Section -->
-        <section id="interactive">
-            <div class="container interactive-container">
-                <div class="interactive-info">
-                    <h2>Control the Spectrum</h2>
-                    <p>Interact with the slider below to shift the accent colors of the website. Watch how the interface adapts to different color temperatures and vibes.</p>
-                    <div class="color-details">
-                        <span class="color-label">Active Tone:</span>
-                        <span id="active-color-name" class="color-value">Royal Blue</span>
-                    </div>
-                </div>
-                <div class="interactive-control">
-                    <div class="spectrum-slider-wrapper">
-                        <input type="range" id="spectrum-hue" min="0" max="360" value="230" class="spectrum-slider">
-                        <div class="spectrum-bar"></div>
-                    </div>
-                    <div class="quick-presets">
-                        <button class="preset-btn active" data-hue="230" style="--btn-color: hsl(230, 85%, 60%)">Indigo</button>
-                        <button class="preset-btn" data-hue="340" style="--btn-color: hsl(340, 85%, 60%)">Rose</button>
-                        <button class="preset-btn" data-hue="150" style="--btn-color: hsl(150, 85%, 50%)">Emerald</button>
-                        <button class="preset-btn" data-hue="25" style="--btn-color: hsl(25, 85%, 55%)">Amber</button>
-                        <button class="preset-btn" data-hue="280" style="--btn-color: hsl(280, 85%, 60%)">Amethyst</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Newsletter / CTA -->
-        <section id="cta">
-            <div class="container cta-container">
-                <div class="cta-card">
-                    <div class="cta-bg-glow"></div>
-                    <h2>Stay in the loop</h2>
-                    <p>Subscribe to our newsletter for clean design tips, updates, and modern web resources.</p>
-                    <form id="newsletter-form" class="cta-form">
-                        <div class="input-group">
-                            <input type="email" id="newsletter-email" placeholder="Enter your email" required>
-                            <button type="submit" class="btn btn-primary" id="btn-subscribe">Subscribe</button>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                    <!-- Card 1 -->
+                    <div class="reveal-element glitch-card bg-dark-card border border-dark-border rounded-xl p-10 backdrop-blur-md relative overflow-hidden group hover:border-neon-cyan/40 transition-all duration-500 cursor-pointer" data-original-text="Accelerating page loads to absolute zero-latency across a globally-linked CDN network.">
+                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-neon-cyan/5 rounded-full blur-2xl group-hover:bg-neon-cyan/10 transition-all"></div>
+                        <div class="w-12 h-12 rounded-lg bg-neon-cyan/5 border border-neon-cyan/20 flex items-center justify-center p-3.5 mb-8 text-neon-cyan group-hover:bg-neon-cyan group-hover:text-dark transition-all duration-300">
+                            <i class="fa-solid fa-gauge-high text-xl"></i>
                         </div>
-                    </form>
-                    <div id="newsletter-status" class="status-msg"></div>
+                        <h3 class="font-mono text-lg font-bold uppercase tracking-wider text-white mb-4 card-title">ULTRA-FAST GLOBAL CDN</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light card-desc">
+                            Accelerating page loads to absolute zero-latency across a globally-linked CDN network.
+                        </p>
+                    </div>
+
+                    <!-- Card 2 -->
+                    <div class="reveal-element delay-100 glitch-card bg-dark-card border border-dark-border rounded-xl p-10 backdrop-blur-md relative overflow-hidden group hover:border-neon-violet/40 transition-all duration-500 cursor-pointer" data-original-text="Engineered with bulletproof semantic codes, strict formatting protocols, and visual consistency.">
+                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-neon-violet/5 rounded-full blur-2xl group-hover:bg-neon-violet/10 transition-all"></div>
+                        <div class="w-12 h-12 rounded-lg bg-neon-violet/5 border border-neon-violet/20 flex items-center justify-center p-3.5 mb-8 text-neon-violet group-hover:bg-neon-violet group-hover:text-dark transition-all duration-300">
+                            <i class="fa-solid fa-code text-xl"></i>
+                        </div>
+                        <h3 class="font-mono text-lg font-bold uppercase tracking-wider text-white mb-4 card-title">CLEAN CODE BLUEPRINT</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light card-desc">
+                            Engineered with bulletproof semantic codes, strict formatting protocols, and visual consistency.
+                        </p>
+                    </div>
+
+                    <!-- Card 3 -->
+                    <div class="reveal-element delay-200 glitch-card bg-dark-card border border-dark-border rounded-xl p-10 backdrop-blur-md relative overflow-hidden group hover:border-neon-cyan/40 transition-all duration-500 cursor-pointer" data-original-text="Crafting immersive layouts with subtle kinetic feedback, scroll parallax, and micro-interactions.">
+                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-neon-cyan/5 rounded-full blur-2xl group-hover:bg-neon-cyan/10 transition-all"></div>
+                        <div class="w-12 h-12 rounded-lg bg-neon-cyan/5 border border-neon-cyan/20 flex items-center justify-center p-3.5 mb-8 text-neon-cyan group-hover:bg-neon-cyan group-hover:text-dark transition-all duration-300">
+                            <i class="fa-solid fa-wand-magic-sparkles text-xl"></i>
+                        </div>
+                        <h3 class="font-mono text-lg font-bold uppercase tracking-wider text-white mb-4 card-title">NEXT-GEN UI/UX RELAY</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light card-desc">
+                            Crafting immersive layouts with subtle kinetic feedback, scroll parallax, and micro-interactions.
+                        </p>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Footer -->
-        <footer id="main-footer">
-            <div class="container footer-container">
-                <p class="copyright">&copy; 2026 Spectrum. Created with pure elegance.</p>
-                <div class="footer-socials">
-                    <a href="#" class="social-link"><i class="fa-brands fa-github"></i></a>
-                    <a href="#" class="social-link"><i class="fa-brands fa-twitter"></i></a>
-                    <a href="#" class="social-link"><i class="fa-brands fa-instagram"></i></a>
+        <!-- SECTION 3: THE FOUNDERS DECK (Massive High-Impact Typography & 3D Tilt) -->
+        <section id="founders" class="py-64 border-t border-dark-border bg-dark/30 relative w-full">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+                <div class="text-center mb-32 reveal-element">
+                    <span class="font-mono text-xs text-neon-violet uppercase tracking-[0.3em] mb-4 inline-block">INFRASTRUCTURE DIRECTORS</span>
+                    <h2 class="text-3xl md:text-5xl font-black tracking-tight font-sans">The Founders Deck</h2>
+                    <div class="w-16 h-1 bg-gradient-to-r from-neon-cyan to-neon-violet mx-auto mt-6 rounded-full shadow-neon-glow"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-20 max-w-5xl mx-auto">
+                    <!-- Founder: Sahil Ali -->
+                    <div class="reveal-element tilt-container bg-dark-card border border-dark-border rounded-2xl p-12 backdrop-blur-md relative overflow-hidden group hover:border-neon-cyan/30 transition-all duration-300" style="transform-style: preserve-3d;">
+                        <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-neon-cyan/5 rounded-full blur-3xl group-hover:bg-neon-cyan/10 transition-all"></div>
+                        <span class="font-mono text-xs text-neon-cyan uppercase tracking-[0.25em] block" style="transform: translateZ(30px);">FOUNDER / CORE ARCHITECT</span>
+                        
+                        <!-- Geometric typography text mask -->
+                        <h3 class="text-5xl md:text-6xl font-black tracking-tighter mt-4 mb-6 leading-none select-none animated-pattern-text" style="transform: translateZ(60px);">
+                            SAHIL ALI
+                        </h3>
+                        <div class="w-12 h-1 bg-neon-cyan mb-8 rounded-full shadow-neon-glow" style="transform: translateZ(25px);"></div>
+                        <p class="text-gray-400 text-base leading-relaxed mb-8 font-light" style="transform: translateZ(40px);">
+                            Directs core development systems, cloud pipeline routing, and front-end interface engineering. Passionate about writing flawless code, building zero-latency systems, and refining the visual flow of modern platforms.
+                        </p>
+                        <div class="flex flex-wrap gap-3 font-mono text-[10px] text-gray-500 uppercase tracking-widest" style="transform: translateZ(50px);">
+                            <span class="px-3 py-1.5 rounded-full border border-dark-border bg-dark/40">Canvas Engines</span>
+                            <span class="px-3 py-1.5 rounded-full border border-dark-border bg-dark/40">Clean Layouts</span>
+                            <span class="px-3 py-1.5 rounded-full border border-dark-border bg-dark/40">Tailwind Config</span>
+                        </div>
+                    </div>
+
+                    <!-- Founder: Aliabbas -->
+                    <div class="reveal-element delay-200 tilt-container bg-dark-card border border-dark-border rounded-2xl p-12 backdrop-blur-md relative overflow-hidden group hover:border-neon-violet/30 transition-all duration-300" style="transform-style: preserve-3d;">
+                        <div class="absolute -right-12 -bottom-12 w-48 h-48 bg-neon-violet/5 rounded-full blur-3xl group-hover:bg-neon-violet/10 transition-all"></div>
+                        <span class="font-mono text-xs text-neon-violet uppercase tracking-[0.25em] block" style="transform: translateZ(30px);">CO-FOUNDER / CHIEF STRATEGIST</span>
+                        
+                        <!-- Geometric typography text mask -->
+                        <h3 class="text-5xl md:text-6xl font-black tracking-tighter mt-4 mb-6 leading-none select-none animated-pattern-text" style="transform: translateZ(60px);">
+                            ALIABBAS
+                        </h3>
+                        <div class="w-12 h-1 bg-neon-violet mb-8 rounded-full shadow-neon-glow" style="transform: translateZ(25px);"></div>
+                        <p class="text-gray-400 text-base leading-relaxed mb-8 font-light" style="transform: translateZ(40px);">
+                            Orchestrates database scaling structures, system security operations, and operational expansion blueprints. Focused on deploying high-availability sites, optimizing server configurations, and boosting client conversion.
+                        </p>
+                        <div class="flex flex-wrap gap-3 font-mono text-[10px] text-gray-500 uppercase tracking-widest" style="transform: translateZ(50px);">
+                            <span class="px-3 py-1.5 rounded-full border border-dark-border bg-dark/40">System Security</span>
+                            <span class="px-3 py-1.5 rounded-full border border-dark-border bg-dark/40">DB Routing</span>
+                            <span class="px-3 py-1.5 rounded-full border border-dark-border bg-dark/40">Conversion Logic</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 4: THE HORIZONTAL TIMELINE LOOP (Our Launch Blueprint) -->
+        <section id="blueprint" class="relative border-t border-dark-border">
+            <div id="pin-container" class="h-[350vh] relative">
+                <!-- Sticky content viewport -->
+                <div class="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden z-20">
+                    <div class="max-w-7xl mx-auto px-6 md:px-12 w-full mb-12">
+                        <span class="font-mono text-xs text-neon-cyan uppercase tracking-[0.3em] mb-2 block">LAUNCH TIMELINE</span>
+                        <h2 class="text-3xl md:text-5xl font-black tracking-tight">Our Launch Blueprint</h2>
+                    </div>
+
+                    <!-- Horizontal Slide Track -->
+                    <div id="slide-track" class="flex gap-10 px-6 md:px-12 w-max transition-transform duration-100 ease-out">
+                        <!-- Phase 1 -->
+                        <div class="w-[320px] md:w-[480px] bg-dark-card border border-dark-border p-10 rounded-2xl backdrop-blur-md relative overflow-hidden group hover:border-neon-cyan/20 transition-all flex flex-col justify-between h-[360px]">
+                            <div>
+                                <span class="font-mono text-neon-cyan text-2xl font-bold tracking-widest">PHASE 01</span>
+                                <h3 class="font-sans text-xl font-bold text-white mt-4 mb-4">Deep Scope Auditing</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                                    We analyze your business architecture, identify competitor flaws, and map out the custom digital infrastructure required for your specific industry.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs font-mono text-neon-cyan/60">
+                                <i class="fa-solid fa-magnifying-glass animate-pulse"></i> AUDITING_STAGE
+                            </div>
+                        </div>
+
+                        <!-- Phase 2 -->
+                        <div class="w-[320px] md:w-[480px] bg-dark-card border border-dark-border p-10 rounded-2xl backdrop-blur-md relative overflow-hidden group hover:border-neon-violet/20 transition-all flex flex-col justify-between h-[360px]">
+                            <div>
+                                <span class="font-mono text-neon-violet text-2xl font-bold tracking-widest">PHASE 02</span>
+                                <h3 class="font-sans text-xl font-bold text-white mt-4 mb-4">Aesthetic UI Blueprinting</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                                    Our designers create stunning, ultra-modern visual layout mockups built around fast navigations, cyberpunk aesthetics, and clean typography.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs font-mono text-neon-violet/60">
+                                <i class="fa-solid fa-bezier-curve animate-pulse"></i> BLUEPRINTING_STAGE
+                            </div>
+                        </div>
+
+                        <!-- Phase 3 -->
+                        <div class="w-[320px] md:w-[480px] bg-dark-card border border-dark-border p-10 rounded-2xl backdrop-blur-md relative overflow-hidden group hover:border-neon-cyan/20 transition-all flex flex-col justify-between h-[360px]">
+                            <div>
+                                <span class="font-mono text-neon-cyan text-2xl font-bold tracking-widest">PHASE 03</span>
+                                <h3 class="font-sans text-xl font-bold text-white mt-4 mb-4">Hyper-Fast Code Engineering</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                                    We translate layout designs into production-ready semantic HTML, responsive stylesheets, database API modules, and dynamic scripts.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs font-mono text-neon-cyan/60">
+                                <i class="fa-solid fa-terminal animate-pulse"></i> CODING_STAGE
+                            </div>
+                        </div>
+
+                        <!-- Phase 4 -->
+                        <div class="w-[320px] md:w-[480px] bg-dark-card border border-dark-border p-10 rounded-2xl backdrop-blur-md relative overflow-hidden group hover:border-neon-violet/20 transition-all flex flex-col justify-between h-[360px]">
+                            <div>
+                                <span class="font-mono text-neon-violet text-2xl font-bold tracking-widest">PHASE 04</span>
+                                <h3 class="font-sans text-xl font-bold text-white mt-4 mb-4">Secure CDN Launch</h3>
+                                <p class="text-gray-400 text-sm leading-relaxed font-light">
+                                    We configure domain parameters, optimize files for lightning-fast loads, set up SSL security, and push the platform live onto global servers.
+                                </p>
+                            </div>
+                            <div class="flex items-center gap-2 text-xs font-mono text-neon-violet/60">
+                                <i class="fa-solid fa-cloud-arrow-up animate-pulse"></i> DEPLOYMENT_STAGE
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 5: THE SERVICE SCOPE & OPERATIONAL RULES -->
+        <section id="scope" class="py-64 border-t border-dark-border bg-dark/20 relative w-full">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
+                <div class="text-center mb-32 reveal-element">
+                    <span class="font-mono text-xs text-neon-cyan uppercase tracking-[0.3em] mb-4 inline-block">BOUNDARIES & LIMITS</span>
+                    <h2 class="text-3xl md:text-5xl font-black tracking-tight font-sans">Service Scope & Operations</h2>
+                    <div class="w-16 h-1 bg-gradient-to-r from-neon-cyan to-neon-violet mx-auto mt-6 rounded-full shadow-neon-glow"></div>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 max-w-6xl mx-auto">
+                    <!-- Rule 1 Card -->
+                    <div class="reveal-element bg-dark-card border border-dark-border rounded-xl p-10 backdrop-blur-md relative overflow-hidden group hover:border-neon-cyan/30 transition-all duration-500">
+                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-neon-cyan/5 rounded-full blur-2xl"></div>
+                        <div class="flex items-center justify-between border-b border-dark-border/40 pb-5 mb-6">
+                            <span class="font-mono text-neon-cyan text-xs uppercase tracking-wider">RULE 01 // LIMITS</span>
+                            <span class="w-2 h-2 rounded-full bg-neon-cyan animate-pulse"></span>
+                        </div>
+                        <h3 class="font-mono text-base font-bold text-white uppercase tracking-wider mb-4">Promotional Framework</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">
+                            Websites built under our standard packages are strictly engineered for promotional and marketing purposes. These platforms are not meant to process or handle official e-commerce order-placing circuits. We integrate the business owner’s official contact routing numbers where final consumer transactions must be processed manually.
+                        </p>
+                    </div>
+
+                    <!-- Rule 2 Card -->
+                    <div class="reveal-element delay-100 bg-dark-card border border-dark-border rounded-xl p-10 backdrop-blur-md relative overflow-hidden group hover:border-neon-violet/30 transition-all duration-500">
+                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-neon-violet/5 rounded-full blur-2xl"></div>
+                        <div class="flex items-center justify-between border-b border-dark-border/40 pb-5 mb-6">
+                            <span class="font-mono text-neon-violet text-xs uppercase tracking-wider">RULE 02 // COMMS</span>
+                            <span class="w-2 h-2 rounded-full bg-neon-violet animate-pulse"></span>
+                        </div>
+                        <h3 class="font-mono text-base font-bold text-white uppercase tracking-wider mb-4">Communication Protocols</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light">
+                            Phone calls are exclusively received and processed over weekends. For all weekday inquiries, we provide interactive chatbots and live chat support lines operating strictly between 1:00 PM and 8:00 PM for project help.
+                        </p>
+                    </div>
+
+                    <!-- Target Card / Stats -->
+                    <div class="reveal-element delay-200 bg-dark-card border border-dark-border rounded-xl p-10 backdrop-blur-md relative overflow-hidden group hover:border-neon-cyan/30 transition-all duration-500">
+                        <div class="absolute -right-8 -top-8 w-24 h-24 bg-neon-cyan/5 rounded-full blur-2xl"></div>
+                        <div class="flex items-center justify-between border-b border-dark-border/40 pb-5 mb-6">
+                            <span class="font-mono text-neon-cyan text-xs uppercase tracking-wider">SYSTEM // TARGETS</span>
+                            <span class="w-2 h-2 rounded-full bg-neon-cyan animate-pulse"></span>
+                        </div>
+                        <h3 class="font-mono text-base font-bold text-white uppercase tracking-wider mb-4">Operational SLAs</h3>
+                        <p class="text-gray-400 text-sm leading-relaxed font-light mb-6">
+                            Our architecture targets extreme uptime parameters and optimized loading speeds for maximum customer retention.
+                        </p>
+                        <div class="space-y-3 font-mono text-xs text-gray-500">
+                            <div class="flex justify-between border-b border-dark-border/20 pb-1.5">
+                                <span>CDN LATENCY:</span>
+                                <span class="text-neon-cyan">&lt; 120ms</span>
+                            </div>
+                            <div class="flex justify-between border-b border-dark-border/20 pb-1.5">
+                                <span>SSL ROTATION:</span>
+                                <span class="text-neon-cyan">AUTOMATIC</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>COMPILATION:</span>
+                                <span class="text-neon-cyan">60FPS CANVAS</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 6: SYSTEM PROTOCOLS & POLICIES (Interactive Dropdowns) -->
+        <section id="policies" class="py-64 border-t border-dark-border relative w-full">
+            <div class="max-w-4xl mx-auto px-6 relative z-10">
+                <div class="text-center mb-32 reveal-element">
+                    <span class="font-mono text-xs text-neon-cyan uppercase tracking-[0.3em] mb-4 inline-block">SYSTEM PROTOCOLS</span>
+                    <h2 class="text-3xl md:text-5xl font-black tracking-tight font-sans">System Protocols & Financial Policies</h2>
+                    <div class="w-16 h-1 bg-gradient-to-r from-neon-cyan to-neon-violet mx-auto mt-6 rounded-full shadow-neon-glow"></div>
+                </div>
+
+                <div class="space-y-5 reveal-element">
+                    <!-- Policy 1 -->
+                    <div class="accordion-item bg-dark-card border border-dark-border rounded-xl overflow-hidden transition-all duration-300">
+                        <button class="accordion-btn w-full px-8 py-6 flex items-center justify-between text-left font-mono font-medium text-sm md:text-base tracking-wider text-gray-200 hover:text-neon-cyan transition-colors">
+                            <span>01 // UPFRONT DEPOSIT POLICY (50% MILESTONE)</span>
+                            <i class="fa-solid fa-plus transition-transform duration-300 text-xs"></i>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                            <div class="px-8 pb-6 pt-2 text-gray-400 text-sm leading-relaxed font-light">
+                                We do not initiate any design, development, or strategic work without a non-refundable 50% deposit paid upfront. This is our absolute first policy; we will never initiate development without initial payment clearance. The remaining 50% balance must be cleared in full upon project completion, right before the website files are handed over or launched live on the primary domain.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Policy 2 -->
+                    <div class="accordion-item bg-dark-card border border-dark-border rounded-xl overflow-hidden transition-all duration-300">
+                        <button class="accordion-btn w-full px-8 py-6 flex items-center justify-between text-left font-mono font-medium text-sm md:text-base tracking-wider text-gray-200 hover:text-neon-cyan transition-colors">
+                            <span>02 // NON-PAYMENT & WEBSITE SUSPENSION</span>
+                            <i class="fa-solid fa-plus transition-transform duration-300 text-xs"></i>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                            <div class="px-8 pb-6 pt-2 text-gray-400 text-sm leading-relaxed font-light">
+                                If recurring monthly fees—such as hosting, security, or maintenance—remain unpaid for 60 days (2 months), we reserve the right to suspend all services and take the website offline. To reactivate a suspended website, the outstanding balance must be paid in full along with a standard reactivation fee.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Policy 3 -->
+                    <div class="accordion-item bg-dark-card border border-dark-border rounded-xl overflow-hidden transition-all duration-300">
+                        <button class="accordion-btn w-full px-8 py-6 flex items-center justify-between text-left font-mono font-medium text-sm md:text-base tracking-wider text-gray-200 hover:text-neon-cyan transition-colors">
+                            <span>03 // OUT-OF-SCOPE REVISIONS & PAID CHANGES</span>
+                            <i class="fa-solid fa-plus transition-transform duration-300 text-xs"></i>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                            <div class="px-8 pb-6 pt-2 text-gray-400 text-sm leading-relaxed font-light">
+                                Once the initial design layout or project scope is approved, any subsequent requests for changes, modifications, new features, or extra pages will incur additional costs. Any work requested outside the boundaries of the original agreement will be billed separately at our standard flat rates or hourly development fees.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Policy 4 -->
+                    <div class="accordion-item bg-dark-card border border-dark-border rounded-xl overflow-hidden transition-all duration-300">
+                        <button class="accordion-btn w-full px-8 py-6 flex items-center justify-between text-left font-mono font-medium text-sm md:text-base tracking-wider text-gray-200 hover:text-neon-cyan transition-colors">
+                            <span>04 // CLIENT CONTENT & ASSET DELAYS</span>
+                            <i class="fa-solid fa-plus transition-transform duration-300 text-xs"></i>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                            <div class="px-8 pb-6 pt-2 text-gray-400 text-sm leading-relaxed font-light">
+                                Clients must provide all required media, copy, branding assets, and text within 14 days of the project kickoff. Failure to deliver materials on time will result in the project being paused. We reserve the right to reschedule the project launch or bill for completed layout work using placeholder text.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Policy 5 -->
+                    <div class="accordion-item bg-dark-card border border-dark-border rounded-xl overflow-hidden transition-all duration-300">
+                        <button class="accordion-btn w-full px-8 py-6 flex items-center justify-between text-left font-mono font-medium text-sm md:text-base tracking-wider text-gray-200 hover:text-neon-cyan transition-colors">
+                            <span>05 // POST-LAUNCH REVIEW WINDOW</span>
+                            <i class="fa-solid fa-plus transition-transform duration-300 text-xs"></i>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                            <div class="px-8 pb-6 pt-2 text-gray-400 text-sm leading-relaxed font-light">
+                                Upon deployment and handover of the completed website, the client has a strict 7-day window to report any bugs, typos, or layout anomalies for free adjustments. Once this 7-day review window closes, any further tweaks, updates, or fixes will fall under paid maintenance rates.
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Policy 6 -->
+                    <div class="accordion-item bg-dark-card border border-dark-border rounded-xl overflow-hidden transition-all duration-300">
+                        <button class="accordion-btn w-full px-8 py-6 flex items-center justify-between text-left font-mono font-medium text-sm md:text-base tracking-wider text-gray-200 hover:text-neon-cyan transition-colors">
+                            <span>06 // THIRD-PARTY SOFTWARE & PLATFORM LIABILITY</span>
+                            <i class="fa-solid fa-plus transition-transform duration-300 text-xs"></i>
+                        </button>
+                        <div class="accordion-content max-h-0 overflow-hidden transition-all duration-300 ease-in-out">
+                            <div class="px-8 pb-6 pt-2 text-gray-400 text-sm leading-relaxed font-light">
+                                We are not liable for website malfunctions, broken layouts, or security vulnerabilities caused by updates to third-party plugins, themes, content management systems, hosting servers, or external APIs after the site goes live. Ongoing technical updates and security monitoring require an active monthly maintenance plan.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SECTION 7: TERMINAL UPLINK (The 24/7 Command Center Footer) -->
+        <footer id="contact" class="border-t border-dark-border bg-[#030307]/95 py-36 relative w-full">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 grid grid-cols-1 lg:grid-cols-12 gap-20 items-center">
+                <!-- Left reliquary details -->
+                <div class="lg:col-span-6 reveal-element">
+                    <h2 class="font-mono text-xl text-neon-cyan tracking-[0.25em] uppercase mb-8 flex items-center gap-3">
+                        <span class="w-3.5 h-3.5 rounded-full bg-neon-cyan shadow-neon-glow animate-pulse"></span> UPLINK ESTABLISHED
+                    </h2>
+                    <p class="text-gray-400 max-w-md text-sm md:text-base leading-relaxed mb-10 font-light">
+                        We build robust, ultra-fast online portals. Reach out to secure your brand's presence 24/7. Connect directly through our secure terminal relays.
+                    </p>
+                    <p class="font-mono text-xs text-gray-600">
+                        SYNC WEBS // ALL RIGHTS SECURED © 2026
+                    </p>
+                </div>
+
+                <!-- Right Connection relayer grid -->
+                <div class="lg:col-span-6 flex flex-col gap-6 font-mono text-sm reveal-element delay-200">
+                    <!-- WhatsApp -->
+                    <a href="https://wa.me/923112082874" target="_blank" class="flex items-center justify-between p-6 border border-dark-border bg-dark-card/50 rounded-xl hover:border-neon-cyan/40 hover:shadow-[0_0_20px_rgba(0,242,254,0.1)] group transition-all duration-300">
+                        <div class="flex items-center gap-4">
+                            <i class="fa-brands fa-whatsapp text-neon-cyan text-2xl"></i>
+                            <span class="text-gray-400 group-hover:text-white transition-colors uppercase tracking-widest text-xs">WhatsApp Uplink</span>
+                        </div>
+                        <span class="text-neon-cyan text-sm">03112082874</span>
+                    </a>
+
+                    <!-- Mail -->
+                    <a href="mailto:spectrum.web.io@gmail.com" class="flex items-center justify-between p-6 border border-dark-border bg-dark-card/50 rounded-xl hover:border-neon-cyan/40 hover:shadow-[0_0_20px_rgba(0,242,254,0.1)] group transition-all duration-300">
+                        <div class="flex items-center gap-4">
+                            <i class="fa-solid fa-envelope-open-text text-neon-cyan text-2xl"></i>
+                            <span class="text-gray-400 group-hover:text-white transition-colors uppercase tracking-widest text-xs">Secure Mail Gateway</span>
+                        </div>
+                        <span class="text-neon-cyan text-sm">spectrum.web.io@gmail.com</span>
+                    </a>
+
+                    <!-- Discord -->
+                    <a href="#" class="flex items-center justify-between p-6 border border-dark-border bg-dark-card/50 rounded-xl hover:border-neon-violet/40 hover:shadow-[0_0_20px_rgba(127,0,255,0.1)] group transition-all duration-300">
+                        <div class="flex items-center gap-4">
+                            <i class="fa-brands fa-discord text-neon-violet text-2xl"></i>
+                            <span class="text-gray-400 group-hover:text-white transition-colors uppercase tracking-widest text-xs">Discord Secure Line</span>
+                        </div>
+                        <span class="text-neon-violet text-sm">@_376K</span>
+                    </a>
                 </div>
             </div>
         </footer>
     </div>
-    <script src="script.js"></script>
+
+    <!-- VANILLA JAVASCRIPT MECHANICS CORE -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            
+            // ==========================================
+            // 1. Dynamic Cursor-Glow Halo Tracking
+            // ==========================================
+            const cursorGlow = document.getElementById('cursor-glow');
+            let mouse = { x: -1000, y: -1000, radius: 180 };
+            
+            window.addEventListener('mousemove', (e) => {
+                mouse.x = e.clientX;
+                mouse.y = e.clientY;
+                if (cursorGlow) {
+                    cursorGlow.style.left = `${e.clientX}px`;
+                    cursorGlow.style.top = `${e.clientY}px`;
+                }
+            });
+
+            // ==========================================
+            // 2. High-Performance Zero-Gravity Canvas Particle Matrix
+            // ==========================================
+            const canvas = document.getElementById('physics-canvas');
+            const ctx = canvas.getContext('2d');
+            let particles = [];
+            
+            function resizeCanvas() {
+                canvas.width = window.innerWidth;
+                canvas.height = window.innerHeight;
+            }
+            
+            window.addEventListener('resize', resizeCanvas);
+            resizeCanvas();
+
+            class Particle {
+                constructor() {
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                    this.size = Math.random() * 2.2 + 0.8;
+                    
+                    // Core zero-gravity drift parameters
+                    this.baseSpeedY = -(Math.random() * 0.4 + 0.1); // slow upward
+                    this.baseSpeedX = Math.random() * 0.2 - 0.1;
+                    
+                    this.vx = this.baseSpeedX;
+                    this.vy = this.baseSpeedY;
+                    
+                    this.angle = Math.random() * Math.PI * 2;
+                    this.angleSpeed = Math.random() * 0.015 - 0.0075;
+                }
+
+                update() {
+                    // Friction damping
+                    this.vx *= 0.97;
+                    this.vy *= 0.97;
+                    
+                    // Accumulate gentle drift forces
+                    this.vy += this.baseSpeedY * 0.04;
+                    this.vx += this.baseSpeedX * 0.04 + Math.sin(this.angle) * 0.006;
+                    this.angle += this.angleSpeed;
+                    
+                    // Repulsion from user cursor
+                    let dx = this.x - mouse.x;
+                    let dy = this.y - mouse.y;
+                    let dist = Math.sqrt(dx * dx + dy * dy);
+                    
+                    if (dist < mouse.radius) {
+                        // Elastic repulsion scalar
+                        let force = (mouse.radius - dist) / mouse.radius; // 0 to 1
+                        let forceDirectionX = dx / dist;
+                        let forceDirectionY = dy / dist;
+                        
+                        this.vx += forceDirectionX * force * 0.55;
+                        this.vy += forceDirectionY * force * 0.55;
+                    }
+
+                    // Apply coordinates
+                    this.x += this.vx;
+                    this.y += this.vy;
+
+                    // Loop boundaries
+                    if (this.y < -15) {
+                        this.y = canvas.height + 15;
+                        this.x = Math.random() * canvas.width;
+                        this.vx = this.baseSpeedX;
+                        this.vy = this.baseSpeedY;
+                    } else if (this.y > canvas.height + 15) {
+                        this.y = -15;
+                        this.x = Math.random() * canvas.width;
+                        this.vx = this.baseSpeedX;
+                        this.vy = this.baseSpeedY;
+                    }
+                    
+                    if (this.x < -15) {
+                        this.x = canvas.width + 15;
+                    } else if (this.x > canvas.width + 15) {
+                        this.x = -15;
+                    }
+                }
+
+                draw() {
+                    ctx.fillStyle = 'rgba(0, 242, 254, 0.45)';
+                    ctx.beginPath();
+                    ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+
+            function initParticles() {
+                particles = [];
+                // Density control based on viewport size
+                const numberOfParticles = Math.min(90, (canvas.width * canvas.height) / 16000);
+                for (let i = 0; i < numberOfParticles; i++) {
+                    particles.push(new Particle());
+                }
+            }
+            initParticles();
+
+            function connectParticles() {
+                for (let a = 0; a < particles.length; a++) {
+                    for (let b = a + 1; b < particles.length; b++) {
+                        let dx = particles[a].x - particles[b].x;
+                        let dy = particles[a].y - particles[b].y;
+                        let dist = Math.sqrt(dx * dx + dy * dy);
+
+                        if (dist < 115) {
+                            let opacity = (1 - (dist / 115)) * 0.14;
+                            
+                            // Glowing Cyan-to-Violet gradient link lines
+                            let grad = ctx.createLinearGradient(particles[a].x, particles[a].y, particles[b].x, particles[b].y);
+                            grad.addColorStop(0, `rgba(0, 242, 254, ${opacity})`);
+                            grad.addColorStop(1, `rgba(127, 0, 255, ${opacity})`);
+                            
+                            ctx.strokeStyle = grad;
+                            ctx.lineWidth = 0.8;
+                            ctx.beginPath();
+                            ctx.moveTo(particles[a].x, particles[a].y);
+                            ctx.lineTo(particles[b].x, particles[b].y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+            }
+
+            function animateParticles() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                for (let i = 0; i < particles.length; i++) {
+                    particles[i].update();
+                    particles[i].draw();
+                }
+                connectParticles();
+                requestAnimationFrame(animateParticles);
+            }
+            animateParticles();
+
+            // ==========================================
+            // 3. Scroll-Observer Reveal System
+            // ==========================================
+            const revealElements = document.querySelectorAll('.reveal-element');
+            const revealObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('active');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+            revealElements.forEach(el => revealObserver.observe(el));
+
+            // ==========================================
+            // 4. Advanced Real-Time System Log Terminal Widget
+            // ==========================================
+            const logContentBox = document.getElementById('log-content-box');
+            const logs = [
+                "SYSTEM: Starting up Digital Uplink Interface...",
+                "STATUS: SSL Handshake secure and CDN nodes ready.",
+                "NETWORK: Syncing datastore relays with client host...",
+                "DATABASE: qzldamecunbynmkqxihh.supabase.co verified on HTTPS.",
+                "IDENTITY: Sahil Ali [FOUNDER] validated on console session.",
+                "IDENTITY: Aliabbas [CO-FOUNDER] validated on console session.",
+                "LAUNCH: Running blueprint compilation (PHASE 01 - 04)...",
+                "STATUS: Sync Webs client workspace fully operational."
+            ];
+
+            let logIndex = 0;
+
+            function addTerminalLog() {
+                if (!logContentBox) return;
+
+                if (logIndex < logs.length) {
+                    const lineContainer = document.createElement('div');
+                    lineContainer.className = 'font-mono text-xs flex items-center';
+                    
+                    const prefix = document.createElement('span');
+                    const text = document.createElement('span');
+                    text.className = 'ml-1 text-gray-300';
+                    
+                    const firstWord = logs[logIndex].split(' ')[0];
+                    const remainingText = logs[logIndex].substring(firstWord.length);
+                    
+                    prefix.textContent = firstWord;
+                    if (firstWord.startsWith("SYSTEM:") || firstWord.startsWith("DATABASE:")) {
+                        prefix.className = 'text-neon-violet';
+                    } else if (firstWord.startsWith("STATUS:")) {
+                        prefix.className = 'text-[#27c93f]';
+                    } else {
+                        prefix.className = 'text-neon-cyan';
+                    }
+                    
+                    lineContainer.appendChild(prefix);
+                    lineContainer.appendChild(text);
+                    logContentBox.appendChild(lineContainer);
+                    
+                    // Simulate typing character by character for the text
+                    let charIndex = 0;
+                    
+                    // Remove blinking caret from previous line if any
+                    const oldCaret = logContentBox.querySelector('.caret');
+                    if (oldCaret) oldCaret.remove();
+                    
+                    const caretSpan = document.createElement('span');
+                    caretSpan.className = 'caret';
+                    lineContainer.appendChild(caretSpan);
+
+                    function typeChar() {
+                        if (charIndex < remainingText.length) {
+                            text.textContent += remainingText[charIndex];
+                            charIndex++;
+                            setTimeout(typeChar, Math.random() * 20 + 10);
+                        } else {
+                            logIndex++;
+                            logContentBox.scrollTop = logContentBox.scrollHeight;
+                            setTimeout(addTerminalLog, Math.random() * 800 + 400);
+                        }
+                    }
+                    typeChar();
+                } else {
+                    // Keep caret blinking on the final line
+                    const finalCaret = logContentBox.querySelector('.caret');
+                    if (finalCaret) {
+                        finalCaret.style.animation = 'blinkCaret 0.8s steps(2, start) infinite';
+                    }
+                }
+            }
+            setTimeout(addTerminalLog, 700);
+
+            // ==========================================
+            // 5. Interactive Glitch Scramble Matrix Cards
+            // ==========================================
+            const glitchCards = document.querySelectorAll('.glitch-card');
+            const binaryChars = '010101_#@Ø▲█■';
+
+            glitchCards.forEach(card => {
+                const titleEl = card.querySelector('.card-title');
+                const descEl = card.querySelector('.card-desc');
+                const originalTitle = titleEl.textContent;
+                const originalDesc = card.getAttribute('data-original-text') || descEl.textContent;
+                
+                let intervalId = null;
+
+                function runGlitch() {
+                    let iteration = 0;
+                    clearInterval(intervalId);
+
+                    intervalId = setInterval(() => {
+                        titleEl.textContent = originalTitle.split('').map((char, index) => {
+                            if (index < iteration) return originalTitle[index];
+                            return binaryChars[Math.floor(Math.random() * binaryChars.length)];
+                        }).join('');
+
+                        descEl.textContent = originalDesc.split('').map((char, index) => {
+                            if (index < iteration * 3) return originalDesc[index];
+                            if (char === ' ') return ' ';
+                            return binaryChars[Math.floor(Math.random() * binaryChars.length)];
+                        }).join('');
+
+                        if (iteration >= originalTitle.length) {
+                            clearInterval(intervalId);
+                            titleEl.textContent = originalTitle;
+                            descEl.textContent = originalDesc;
+                        }
+                        iteration += 1;
+                    }, 25);
+                }
+
+                card.addEventListener('mouseenter', runGlitch);
+                card.addEventListener('click', runGlitch);
+            });
+
+            // ==========================================
+            // 6. 3D Perspective Card Tilt Warp
+            // ==========================================
+            const tiltContainers = document.querySelectorAll('.tilt-container');
+
+            tiltContainers.forEach(container => {
+                container.addEventListener('mousemove', (e) => {
+                    const rect = container.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+
+                    // Tilt max degrees
+                    const rotateX = -(y - centerY) / (centerY / 12);
+                    const rotateY = (x - centerX) / (centerX / 12);
+
+                    container.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+
+                container.style.transition = 'transform 0.08s ease-out';
+
+                container.addEventListener('mouseleave', () => {
+                    container.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)';
+                    container.style.transition = 'transform 0.5s ease-out';
+                });
+            });
+
+            // ==========================================
+            // 7. Interactive Magnetic CTA Buttons
+            // ==========================================
+            const magneticButtons = document.querySelectorAll('.magnetic-btn');
+
+            magneticButtons.forEach(btn => {
+                btn.addEventListener('mousemove', (e) => {
+                    const rect = btn.getBoundingClientRect();
+                    const x = e.clientX - rect.left - rect.width / 2;
+                    const y = e.clientY - rect.top - rect.height / 2;
+
+                    btn.style.transform = `translate(${x * 0.28}px, ${y * 0.28}px)`;
+                });
+
+                btn.style.transition = 'transform 0.08s ease-out';
+
+                btn.addEventListener('mouseleave', () => {
+                    btn.style.transform = '';
+                    btn.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+                });
+            });
+
+            // ==========================================
+            // 8. Smooth Accordion Suite Toggles
+            // ==========================================
+            const accordionBtns = document.querySelectorAll('.accordion-btn');
+
+            accordionBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const item = btn.parentElement;
+                    const content = btn.nextElementSibling;
+                    const icon = btn.querySelector('i');
+                    
+                    const isActive = item.classList.contains('active');
+
+                    // Close other open accordions
+                    document.querySelectorAll('.accordion-item').forEach(otherItem => {
+                        otherItem.classList.remove('active');
+                        otherItem.querySelector('.accordion-content').style.maxHeight = null;
+                        const otherIcon = otherItem.querySelector('.accordion-btn i');
+                        if (otherIcon) {
+                            otherIcon.className = 'fa-solid fa-plus transition-transform duration-300 text-xs';
+                        }
+                    });
+
+                    // Toggle selected accordion
+                    if (!isActive) {
+                        item.classList.add('active');
+                        content.style.maxHeight = `${content.scrollHeight}px`;
+                        if (icon) {
+                            icon.className = 'fa-solid fa-minus transition-transform duration-300 text-xs rotate-180';
+                        }
+                    }
+                });
+            });
+
+            // ==========================================
+            // 9. LERP Scroll Easing and Parallax Mechanics
+            // ==========================================
+            let smoothScrollY = 0;
+            let targetScrollY = 0;
+
+            window.addEventListener('scroll', () => {
+                targetScrollY = window.scrollY;
+            }, { passive: true });
+
+            const codeStream = document.getElementById('code-stream');
+            const gridMesh = document.querySelector('.technical-grid');
+            const pinContainer = document.getElementById('pin-container');
+            const slideTrack = document.getElementById('slide-track');
+
+            function updateScrollPhysics() {
+                // Interpolation formula: LERP
+                smoothScrollY += (targetScrollY - smoothScrollY) * 0.078;
+                
+                // 1. Scroll Progress Bar Update
+                const maxScrollable = document.documentElement.scrollHeight - window.innerHeight;
+                if (maxScrollable > 0) {
+                    const scrollPercent = smoothScrollY / maxScrollable;
+                    document.getElementById('scroll-progress').style.width = `${scrollPercent * 100}%`;
+                }
+
+                // 2. Parallax Code Stream Layer
+                if (codeStream) {
+                    codeStream.style.transform = `translateY(${smoothScrollY * 0.28}px)`;
+                }
+
+                // 3. Parallax Technical Grid Mesh Layer
+                if (gridMesh) {
+                    gridMesh.style.transform = `translateY(${-smoothScrollY * 0.08}px)`;
+                }
+
+                // 4. Horizontal Scroll Slider Lock translation
+                if (pinContainer && slideTrack) {
+                    const pinTop = pinContainer.offsetTop;
+                    const pinHeight = pinContainer.offsetHeight;
+                    const scrollRange = pinHeight - window.innerHeight;
+                    
+                    const offset = smoothScrollY - pinTop;
+                    let scrollPercent = Math.max(0, Math.min(1, offset / scrollRange));
+                    
+                    const maxSlideDistance = slideTrack.scrollWidth - window.innerWidth;
+                    slideTrack.style.transform = `translateX(${-scrollPercent * maxSlideDistance}px)`;
+                }
+
+                requestAnimationFrame(updateScrollPhysics);
+            }
+            // Fire smooth animation loop
+            requestAnimationFrame(updateScrollPhysics);
+        });
+    </script>
 </body>
 </html>
