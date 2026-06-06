@@ -182,16 +182,16 @@
             background: rgba(12, 12, 24, 0.85) !important;
         }
 
-        /* Standard scroll reveal states */
+        /* Standard scroll reveal states - smooth scale & drift reveal */
         .reveal-element {
             opacity: 0;
-            transform: translateY(45px);
-            transition: opacity 1.3s cubic-bezier(0.16, 1, 0.3, 1), transform 1.3s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(35px) scale(0.97);
+            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
         .reveal-element.active {
             opacity: 1;
-            transform: translateY(0);
+            transform: translateY(0) scale(1);
         }
 
         /* Custom Neon Gradient borders on cyber sheets */
@@ -249,8 +249,7 @@
 </head>
 <body class="bg-dark text-gray-200 overflow-x-hidden font-sans selection:bg-neon-cyan selection:text-dark relative">
 
-    <!-- Top Neon Scroll Progress Relay -->
-    <div id="scroll-progress" class="fixed top-0 left-0 h-[2.5px] bg-gradient-to-r from-neon-cyan to-neon-violet z-[100] w-0 transition-all duration-100"></div>
+
 
     <!-- 3D Parallax Infrastructure Layers -->
     
@@ -290,12 +289,6 @@
         
         <!-- HEADER / NAVIGATION RELAYS -->
         <header class="fixed top-0 left-0 w-full z-50 border-b border-dark-border backdrop-blur-md bg-dark/60">
-            <!-- Live Status Ticker -->
-            <div class="bg-black/90 border-b border-dark-border/50 py-1.5 px-6 text-[10px] font-mono tracking-[0.2em] text-gray-500 flex justify-between items-center z-[60] relative">
-                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-neon-cyan animate-pulse"></span> UPTIME: 99.98%</span>
-                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-[#ffb300] animate-ping"></span> STATUS: ONLINE</span>
-                <span class="flex items-center gap-1.5"><span class="w-1.5 h-1.5 rounded-full bg-neon-violet"></span> ACTIVE PROTOCOLS: SECURE</span>
-            </div>
 
             <div class="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
                 <a href="#" class="logo-container group flex items-center gap-3">
@@ -1191,12 +1184,6 @@
 
             function updateScrollPhysics() {
                 smoothScrollY += (targetScrollY - smoothScrollY) * 0.078;
-                
-                const maxScrollable = document.documentElement.scrollHeight - window.innerHeight;
-                if (maxScrollable > 0) {
-                    const scrollPercent = smoothScrollY / maxScrollable;
-                    document.getElementById('scroll-progress').style.width = `${scrollPercent * 100}%`;
-                }
 
                 if (codeStream) {
                     codeStream.style.transform = `translateY(${smoothScrollY * 0.28}px)`;
