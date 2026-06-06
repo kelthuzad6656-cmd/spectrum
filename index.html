@@ -234,8 +234,16 @@
             animation: blinkCaret 0.8s steps(2, start) infinite;
             vertical-align: middle;
         }
-        @keyframes blinkCaret {
-            to { visibility: hidden; }
+        /* Mobile horizontal timeline fallback */
+        @media (max-width: 1024px) {
+            #pin-container {
+                overflow-x: auto !important;
+                -webkit-overflow-scrolling: touch;
+            }
+            #slide-track {
+                transform: none !important;
+                padding-bottom: 12px;
+            }
         }
     </style>
 </head>
@@ -472,71 +480,69 @@
         </section>
 
         <!-- SECTION 4: THE HORIZONTAL TIMELINE LOOP (Our Launch Blueprint) -->
-        <section id="blueprint" class="relative border-t border-dark-border">
-            <div id="pin-container" class="h-[350vh] relative">
-                <!-- Sticky content viewport -->
-                <div class="sticky top-0 h-screen w-full flex flex-col justify-center overflow-hidden z-20">
-                    <div class="max-w-7xl mx-auto px-6 md:px-12 w-full mb-12">
-                        <span class="font-mono text-xs text-neon-cyan uppercase tracking-[0.3em] mb-2 block">LAUNCH TIMELINE</span>
-                        <h2 class="text-3xl md:text-5xl font-black tracking-tight">Our Launch Blueprint</h2>
+        <section id="blueprint" class="py-64 border-t border-dark-border relative w-full overflow-hidden">
+            <div class="max-w-7xl mx-auto px-6 md:px-12 w-full mb-12 reveal-element">
+                <span class="font-mono text-xs text-neon-cyan uppercase tracking-[0.3em] mb-2 block">LAUNCH TIMELINE</span>
+                <h2 class="text-3xl md:text-5xl font-black tracking-tight">Our Launch Blueprint</h2>
+            </div>
+
+            <!-- Horizontal Viewport -->
+            <div id="pin-container" class="w-full overflow-hidden relative cursor-ew-resize">
+                <!-- Horizontal Slide Track -->
+                <div id="slide-track" class="flex gap-10 px-6 md:px-12 w-max transition-transform duration-300 ease-out">
+                    <!-- Phase 1 -->
+                    <div class="w-[320px] md:w-[480px] bg-dark-card border border-dark-border p-10 rounded-2xl backdrop-blur-md relative overflow-hidden group hover:border-neon-cyan/20 transition-all flex flex-col justify-between h-[360px]">
+                        <div>
+                            <span class="font-mono text-neon-cyan text-2xl font-bold tracking-widest">PHASE 01</span>
+                            <h3 class="font-sans text-xl font-bold text-white mt-4 mb-4">Deep Scope Auditing</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed font-light">
+                                We analyze your business architecture, identify competitor flaws, and map out the custom digital infrastructure required for your specific industry.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-mono text-neon-cyan/60">
+                            <i class="fa-solid fa-magnifying-glass animate-pulse"></i> AUDITING_STAGE
+                        </div>
                     </div>
 
-                    <!-- Horizontal Slide Track -->
-                    <div id="slide-track" class="flex gap-10 px-6 md:px-12 w-max transition-transform duration-100 ease-out">
-                        <!-- Phase 1 -->
-                        <div class="w-[320px] md:w-[480px] bg-dark-card border border-dark-border p-10 rounded-2xl backdrop-blur-md relative overflow-hidden group hover:border-neon-cyan/20 transition-all flex flex-col justify-between h-[360px]">
-                            <div>
-                                <span class="font-mono text-neon-cyan text-2xl font-bold tracking-widest">PHASE 01</span>
-                                <h3 class="font-sans text-xl font-bold text-white mt-4 mb-4">Deep Scope Auditing</h3>
-                                <p class="text-gray-400 text-sm leading-relaxed font-light">
-                                    We analyze your business architecture, identify competitor flaws, and map out the custom digital infrastructure required for your specific industry.
-                                </p>
-                            </div>
-                            <div class="flex items-center gap-2 text-xs font-mono text-neon-cyan/60">
-                                <i class="fa-solid fa-magnifying-glass animate-pulse"></i> AUDITING_STAGE
-                            </div>
+                    <!-- Phase 2 -->
+                    <div class="w-[320px] md:w-[480px] bg-dark-card border border-dark-border p-10 rounded-2xl backdrop-blur-md relative overflow-hidden group hover:border-neon-violet/20 transition-all flex flex-col justify-between h-[360px]">
+                        <div>
+                            <span class="font-mono text-neon-violet text-2xl font-bold tracking-widest">PHASE 02</span>
+                            <h3 class="font-sans text-xl font-bold text-white mt-4 mb-4">Aesthetic UI Blueprinting</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed font-light">
+                                Our designers create stunning, ultra-modern visual layout mockups built around fast navigations, cyberpunk aesthetics, and clean typography.
+                            </p>
                         </div>
-
-                        <!-- Phase 2 -->
-                        <div class="w-[320px] md:w-[480px] bg-dark-card border border-dark-border p-10 rounded-2xl backdrop-blur-md relative overflow-hidden group hover:border-neon-violet/20 transition-all flex flex-col justify-between h-[360px]">
-                            <div>
-                                <span class="font-mono text-neon-violet text-2xl font-bold tracking-widest">PHASE 02</span>
-                                <h3 class="font-sans text-xl font-bold text-white mt-4 mb-4">Aesthetic UI Blueprinting</h3>
-                                <p class="text-gray-400 text-sm leading-relaxed font-light">
-                                    Our designers create stunning, ultra-modern visual layout mockups built around fast navigations, cyberpunk aesthetics, and clean typography.
-                                </p>
-                            </div>
-                            <div class="flex items-center gap-2 text-xs font-mono text-neon-violet/60">
-                                <i class="fa-solid fa-bezier-curve animate-pulse"></i> BLUEPRINTING_STAGE
-                            </div>
+                        <div class="flex items-center gap-2 text-xs font-mono text-neon-violet/60">
+                            <i class="fa-solid fa-bezier-curve animate-pulse"></i> BLUEPRINTING_STAGE
                         </div>
+                    </div>
 
-                        <!-- Phase 3 -->
-                        <div class="w-[320px] md:w-[480px] bg-dark-card border border-dark-border p-10 rounded-2xl backdrop-blur-md relative overflow-hidden group hover:border-neon-cyan/20 transition-all flex flex-col justify-between h-[360px]">
-                            <div>
-                                <span class="font-mono text-neon-cyan text-2xl font-bold tracking-widest">PHASE 03</span>
-                                <h3 class="font-sans text-xl font-bold text-white mt-4 mb-4">Hyper-Fast Code Engineering</h3>
-                                <p class="text-gray-400 text-sm leading-relaxed font-light">
-                                    We translate layout designs into production-ready semantic HTML, responsive stylesheets, database API modules, and dynamic scripts.
-                                </p>
-                            </div>
-                            <div class="flex items-center gap-2 text-xs font-mono text-neon-cyan/60">
-                                <i class="fa-solid fa-terminal animate-pulse"></i> CODING_STAGE
-                            </div>
+                    <!-- Phase 3 -->
+                    <div class="w-[320px] md:w-[480px] bg-dark-card border border-dark-border p-10 rounded-2xl backdrop-blur-md relative overflow-hidden group hover:border-neon-cyan/20 transition-all flex flex-col justify-between h-[360px]">
+                        <div>
+                            <span class="font-mono text-neon-cyan text-2xl font-bold tracking-widest">PHASE 03</span>
+                            <h3 class="font-sans text-xl font-bold text-white mt-4 mb-4">Hyper-Fast Code Engineering</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed font-light">
+                                We translate layout designs into production-ready semantic HTML, responsive stylesheets, database API modules, and dynamic scripts.
+                            </p>
                         </div>
+                        <div class="flex items-center gap-2 text-xs font-mono text-neon-cyan/60">
+                            <i class="fa-solid fa-terminal animate-pulse"></i> CODING_STAGE
+                        </div>
+                    </div>
 
-                        <!-- Phase 4 -->
-                        <div class="w-[320px] md:w-[480px] bg-dark-card border border-dark-border p-10 rounded-2xl backdrop-blur-md relative overflow-hidden group hover:border-neon-violet/20 transition-all flex flex-col justify-between h-[360px]">
-                            <div>
-                                <span class="font-mono text-neon-violet text-2xl font-bold tracking-widest">PHASE 04</span>
-                                <h3 class="font-sans text-xl font-bold text-white mt-4 mb-4">Secure CDN Launch</h3>
-                                <p class="text-gray-400 text-sm leading-relaxed font-light">
-                                    We configure domain parameters, optimize files for lightning-fast loads, set up SSL security, and push the platform live onto global servers.
-                                </p>
-                            </div>
-                            <div class="flex items-center gap-2 text-xs font-mono text-neon-violet/60">
-                                <i class="fa-solid fa-cloud-arrow-up animate-pulse"></i> DEPLOYMENT_STAGE
-                            </div>
+                    <!-- Phase 4 -->
+                    <div class="w-[320px] md:w-[480px] bg-dark-card border border-dark-border p-10 rounded-2xl backdrop-blur-md relative overflow-hidden group hover:border-neon-violet/20 transition-all flex flex-col justify-between h-[360px]">
+                        <div>
+                            <span class="font-mono text-neon-violet text-2xl font-bold tracking-widest">PHASE 04</span>
+                            <h3 class="font-sans text-xl font-bold text-white mt-4 mb-4">Secure CDN Launch</h3>
+                            <p class="text-gray-400 text-sm leading-relaxed font-light">
+                                We configure domain parameters, optimize files for lightning-fast loads, set up SSL security, and push the platform live onto global servers.
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-2 text-xs font-mono text-neon-violet/60">
+                            <i class="fa-solid fa-cloud-arrow-up animate-pulse"></i> DEPLOYMENT_STAGE
                         </div>
                     </div>
                 </div>
@@ -1135,6 +1141,54 @@
             const pinContainer = document.getElementById('pin-container');
             const slideTrack = document.getElementById('slide-track');
 
+            // Timeline slider state vectors
+            let currentTranslateX = 0;
+            let targetTranslateX = 0;
+            let isHovered = false;
+
+            if (pinContainer && slideTrack) {
+                // Monitor mouse interactions
+                pinContainer.addEventListener('mouseenter', () => {
+                    isHovered = true;
+                });
+                pinContainer.addEventListener('mouseleave', () => {
+                    isHovered = false;
+                });
+
+                // Translate wheel rotation directly into track slide
+                pinContainer.addEventListener('wheel', (e) => {
+                    if (window.innerWidth > 1024 && isHovered) {
+                        const maxSlideDistance = slideTrack.scrollWidth - pinContainer.clientWidth;
+                        if (maxSlideDistance <= 0) return;
+
+                        let nextTarget = targetTranslateX - e.deltaY * 0.95;
+                        let clampedTarget = Math.max(-maxSlideDistance, Math.min(0, nextTarget));
+
+                        // Release lock to allow native scrolling at boundaries
+                        if (e.deltaY > 0 && targetTranslateX <= -maxSlideDistance) {
+                            return; // Slide ends - native scroll down
+                        }
+                        if (e.deltaY < 0 && targetTranslateX >= 0) {
+                            return; // Slide start - native scroll up
+                        }
+
+                        e.preventDefault();
+                        targetTranslateX = clampedTarget;
+                    }
+                }, { passive: false });
+
+                window.addEventListener('resize', () => {
+                    if (window.innerWidth <= 1024) {
+                        slideTrack.style.transform = 'none';
+                        targetTranslateX = 0;
+                        currentTranslateX = 0;
+                    } else {
+                        const maxSlideDistance = slideTrack.scrollWidth - pinContainer.clientWidth;
+                        targetTranslateX = Math.max(-maxSlideDistance, Math.min(0, targetTranslateX));
+                    }
+                });
+            }
+
             function updateScrollPhysics() {
                 smoothScrollY += (targetScrollY - smoothScrollY) * 0.078;
                 
@@ -1152,16 +1206,10 @@
                     gridMesh.style.transform = `translateY(${-smoothScrollY * 0.08}px)`;
                 }
 
-                if (pinContainer && slideTrack) {
-                    const pinTop = pinContainer.offsetTop;
-                    const pinHeight = pinContainer.offsetHeight;
-                    const scrollRange = pinHeight - window.innerHeight;
-                    
-                    const offset = smoothScrollY - pinTop;
-                    let scrollPercent = Math.max(0, Math.min(1, offset / scrollRange));
-                    
-                    const maxSlideDistance = slideTrack.scrollWidth - window.innerWidth;
-                    slideTrack.style.transform = `translateX(${-scrollPercent * maxSlideDistance}px)`;
+                // Smoothly slide horizontal track with LERP on desktop only
+                if (pinContainer && slideTrack && window.innerWidth > 1024) {
+                    currentTranslateX += (targetTranslateX - currentTranslateX) * 0.098;
+                    slideTrack.style.transform = `translateX(${currentTranslateX}px)`;
                 }
 
                 requestAnimationFrame(updateScrollPhysics);
