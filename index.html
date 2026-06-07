@@ -198,8 +198,8 @@
         /* Standard scroll reveal states - smooth scale & drift reveal */
         .reveal-element {
             opacity: 0;
-            transform: translateY(35px) scale(0.97);
-            transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px) scale(0.99);
+            transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
             will-change: opacity, transform;
         }
         .reveal-element.active {
@@ -313,10 +313,10 @@
         <header class="fixed top-0 left-0 w-full z-50 border-b border-dark-border backdrop-blur-md bg-dark/60">
 
             <div class="max-w-7xl mx-auto px-6 md:px-12 h-20 flex items-center justify-between">
-                <a href="#" class="logo-container group flex items-center gap-3">
+                <a href="#" class="logo-container group flex items-center gap-1.5 sm:gap-3">
                     <!-- Custom Neon Wave S Logo -->
-                    <img src="logo.png" alt="Sync Webs" class="h-10 w-auto object-contain group-hover:opacity-85 transition-opacity">
-                    <span class="font-mono text-xl font-bold tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-violet group-hover:opacity-85 transition-opacity">
+                    <img src="logo.png" alt="Sync Webs" class="h-7 sm:h-10 w-auto object-contain group-hover:opacity-85 transition-opacity">
+                    <span class="font-mono text-sm sm:text-xl font-bold tracking-[0.1em] sm:tracking-[0.2em] text-transparent bg-clip-text bg-gradient-to-r from-neon-cyan to-neon-violet group-hover:opacity-85 transition-opacity">
                         SYNC WEBS
                     </span>
                 </a>
@@ -514,7 +514,7 @@
             </div>
 
             <!-- Horizontal Viewport -->
-            <div id="pin-container" class="w-full overflow-hidden relative cursor-ew-resize">
+            <div id="pin-container" class="w-full overflow-hidden no-scrollbar relative cursor-ew-resize">
                 <!-- Horizontal Slide Track -->
                 <div id="slide-track" class="flex gap-10 px-6 md:px-12 w-max transition-transform duration-300 ease-out">
                     <!-- Phase 1 -->
@@ -948,6 +948,9 @@
                 let resizeCanvas = function() {
                     canvas.width = window.innerWidth;
                     canvas.height = window.innerHeight;
+                    if (window.innerWidth > 1024 && particles.length === 0) {
+                        initParticles();
+                    }
                 }
                 
                 window.addEventListener('resize', resizeCanvas);
@@ -1028,6 +1031,7 @@
 
                 function initParticles() {
                     particles = [];
+                    if (window.innerWidth <= 1024) return; // Skip particle creation on mobile
                     // Density control based on viewport size
                     const numberOfParticles = Math.min(90, (canvas.width * canvas.height) / 16000);
                     for (let i = 0; i < numberOfParticles; i++) {
@@ -1063,6 +1067,11 @@
                 }
 
                 function animateParticles() {
+                    if (window.innerWidth <= 1024) {
+                        ctx.clearRect(0, 0, canvas.width, canvas.height);
+                        requestAnimationFrame(animateParticles);
+                        return; // Bypasses loop entirely for CPU efficiency on mobile
+                    }
                     ctx.clearRect(0, 0, canvas.width, canvas.height);
                     for (let i = 0; i < particles.length; i++) {
                         particles[i].update();
@@ -1124,7 +1133,7 @@
                 "SYSTEM: Starting up Digital Uplink Interface...",
                 "STATUS: SSL Handshake secure and CDN nodes ready.",
                 "NETWORK: Syncing datastore relays with client host...",
-                "DATABASE: qzldamecunbynmkqxihh.supabase.co verified on HTTPS.",
+                "DATABASE: secure_clusters.db connected via HTTPS.",
                 "IDENTITY: Sahil Ali [FOUNDER] validated on console session.",
                 "IDENTITY: Aliabbas [CO-FOUNDER] validated on console session.",
                 "LAUNCH: Running blueprint compilation (PHASE 01 - 04)...",
